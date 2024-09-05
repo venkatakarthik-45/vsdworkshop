@@ -10,3 +10,5 @@
 ## Inception of open-source EDA, OpenLANE and Sky130 PDK
 
 - **How to talk to computers**
+
+git rm README.md
