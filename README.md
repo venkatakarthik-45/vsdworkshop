@@ -1,6 +1,5 @@
 
-# **NASSCOM VSD DIGITAL VLSI SoC** 
-## Design and Planning
+# **NASSCOM VSD DIGITAL VLSI SOC Design and Planning**
 
 - This workshop, organized by **VLSI SYSTEM DESIGN (VSD) in collaboration with NASSCOM, focuses on Digital VLSI SoC (System on Chip) design and planning**.
 
