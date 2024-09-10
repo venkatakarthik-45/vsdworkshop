@@ -40,13 +40,13 @@
 
 - A typical chip consists of a SOC, SRAM, ADC, DAC, PLL, and other components. The PLL, ADC, DAC, and SRAM are actually Foundry IPs.
   
-- **Foundry** :
-    A foundry is a company that manufactures semiconductor chips for other companies. The foundry doesn't design the chips; it only 
+### **Foundry** :
+  - A foundry is a company that manufactures semiconductor chips for other companies. The foundry doesn't design the chips; it only 
     handles the fabrication process.These companies, like TSMC (Taiwan Semiconductor Manufacturing Company) and GlobalFoundries, 
     specialize in the production of semiconductor chips but do not design their own.
 
-- **Foundry IPs (Intellectual Property)** :
-    IPs require significant expertise and intelligence to build particular Blocks. It actually refers to pre-designed and verified 
+### **Foundry IPs (Intellectual Property)** :
+  - IPs require significant expertise and intelligence to build particular Blocks. It actually refers to pre-designed and verified 
     building blocks 
     (often called IP blocks) that a foundry offers to chip designers. These IPs help designers accelerate the development of their chips 
     without having to design everything from scratch.
