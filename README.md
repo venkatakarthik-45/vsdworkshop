@@ -53,7 +53,66 @@
 
    ![Screenshot (513)](https://github.com/user-attachments/assets/f93cb0a9-f43a-4a57-93e2-4f6445072982)
 
+## L2 :  Introduction to RISC-V
 
+### **ISA (Instruction Set Architecture)***
+ - In general terms, an Instruction Set Architecture (ISA) is the set of instructions that a computer's processor (CPU) can execute. It 
+   defines the interface between software and hardware, specifying how software controls the hardware. Like it's nothing but a language 
+   of a computer.
+ - You can think of an Instruction Set Architecture (ISA) as the "language" of a computer's processor. Just like a human language has 
+   grammar and vocabulary that define how words and sentences are constructed and understood, an ISA defines how instructions are 
+   formatted, what operations the CPU can perform, and how it interacts with memory and other components.
+   1) Instructions: The "words" in this language are the instructions that the CPU can execute, such as arithmetic operations, data 
+      transfers, and control instructions.
+   2) Syntax and Semantics: The ISA specifies the syntax (format) and semantics (meaning) of each instruction, dictating how instructions 
+      should be written and what they do.
+   3) Communication: Just as languages facilitate communication between people, an ISA facilitates communication between software and 
+      hardware, enabling programs to control the CPU and perform tasks.
+
+ ## L3 : From Software Applications to Hardware
+
+ - When you use an app on your computer, it sends commands to the system software (like the operating system), which acts as a translator 
+   between your app and the hardware. The system software converts these commands into binary code (the language of the hardware), which 
+   the CPU and other components then execute. The results are then sent back through the system software to the app, allowing you to see 
+   the outcome of your actions.
+ - So the Application software enters the block called System software and then the application program converts into the binary language 
+   which is understandable for the hardware.
+ - Application Software is like MS Office, Firefox, Acrobat Reader DC, etc.
+ - For System Software the major components are OS, Compiler, and Assembler.
+
+![Screenshot (516)](https://github.com/user-attachments/assets/33456517-57ec-43fe-8961-346de33150eb)
+
+
+### Operating System (OS) :
+ - The operating system (OS) is responsible for handling input/output operations, allocating memory, and managing low-level system 
+   functions. Its main role is to translate a specific application into its respective assembly language program and ultimately into 
+   binary language, making it understandable by the hardware. This is the primary function of the OS.
+   
+### Compiler :
+ - The compiler is used to convert the respective program or any standard format to its respective language based on the hardware we are 
+   using. The Output of the Compiler i.e. the syntax of `.exe file` depends on the hardware we are using.
+ - The `.exe file` consist of instructions that has been implemented by the particular hardware. The hardware here is RISC V.
+
+### Assembler :
+ - Once we receive instructions from the compiler, the assembler will take each instruction and convert it into its respective binary 
+   numbers, also known as a machine language program. Finally, the binary language is sent to the hardware. When the hardware receives a 
+   specific pattern or information, it performs a task and generates the output accordingly.
+
+- The instructions we receive from the compiler serve as the interface between the C language and the hardware. These instructions are 
+  known as the ISA or computer architecture. The interface is referred to as the abstract interface.
+
+![Screenshot (520)](https://github.com/user-attachments/assets/df4c46ad-9378-4833-80d2-e613e3a51cde)
+![Screenshot (521)](https://github.com/user-attachments/assets/126624e4-a859-4654-bb45-3b4ffead7dc3)
+ 
+
+- If we delve deeper, there is another interface that plays a major role in reaching the hardware: Hardware Description Language (HDL).
+- First, we need to write the HDL for the instruction. Then we synthesize it into the Gate Level Netlist, followed by converting the 
+  Gate Level Netlist into its respective Layout based on the general RTL2GDS Flow.
+   
+![Screenshot (522)](https://github.com/user-attachments/assets/f362374f-6045-4fe8-a49f-971d54dd2e2d)
+
+   
+     
 
 
 
