@@ -1,5 +1,8 @@
 ![VSD-Logo](https://github.com/user-attachments/assets/c5fed76c-83e9-4839-810f-16963bd59484)
 
+
+<img src="https://github.com/user-attachments/assets/c5fed76c-83e9-4839-810f-16963bd59484.png" width=100% height=100%>
+
 # **NASSCOM VSD DIGITAL VLSI SOC Design and Planning**
 
 - This workshop, organized by **VLSI SYSTEM DESIGN (VSD) in collaboration with NASSCOM, focuses on Digital VLSI SoC (System on Chip) design and planning**.
