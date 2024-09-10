@@ -55,7 +55,7 @@
 
 ## L2 :  Introduction to RISC-V
 
-### **ISA (Instruction Set Architecture)***
+### **ISA (Instruction Set Architecture)**
  - In general terms, an Instruction Set Architecture (ISA) is the set of instructions that a computer's processor (CPU) can execute. It 
    defines the interface between software and hardware, specifying how software controls the hardware. Like it's nothing but a language 
    of a computer.
