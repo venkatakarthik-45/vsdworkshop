@@ -25,14 +25,14 @@
 
 - In the above figure, the chip which is originated in the middle shares the signals to the external world using **PADS**.
 
-- **PADS** :
-    Pads are critical for making electrical connections between components and the different parts of a package.
+### **PADS** :
+  - Pads are critical for making electrical connections between components and the different parts of a package.
   
-- **DIE** :
-    The die is the size of the actual chip within an integrated circuit (IC). It contains the transistors and other electronic components.
+### **DIE** :
+  - The die is the size of the actual chip within an integrated circuit (IC). It contains the transistors and other electronic components.
   
-- **CORE** :
-    A core refers to the main processing unit of a chip. Like all the digital logic takes place. It is a section of the die that performs 
+### **CORE** :
+  - A core refers to the main processing unit of a chip. Like all the digital logic takes place. It is a section of the die that performs 
     computing tasks by executing instructions. Modern processors often have multiple cores (e.g., quad-core, octa-core), allowing them to 
     perform multiple tasks simultaneously (multithreading/multiprocessing).
 
