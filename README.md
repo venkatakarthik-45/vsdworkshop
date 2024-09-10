@@ -62,12 +62,12 @@
  - You can think of an Instruction Set Architecture (ISA) as the "language" of a computer's processor. Just like a human language has 
    grammar and vocabulary that define how words and sentences are constructed and understood, an ISA defines how instructions are 
    formatted, what operations the CPU can perform, and how it interacts with memory and other components.
-   1) Instructions: The "words" in this language are the instructions that the CPU can execute, such as arithmetic operations, data 
-      transfers, and control instructions.
-   2) Syntax and Semantics: The ISA specifies the syntax (format) and semantics (meaning) of each instruction, dictating how instructions 
-      should be written and what they do.
-   3) Communication: Just as languages facilitate communication between people, an ISA facilitates communication between software and 
-      hardware, enabling programs to control the CPU and perform tasks.
+   * *1) Instructions:* * The "words" in this language are the instructions that the CPU can execute, such as arithmetic operations, 
+      data transfers, and control instructions.
+   * *2) Syntax and Semantics:* * The ISA specifies the syntax (format) and semantics (meaning) of each instruction, dictating how 
+      instructions should be written and what they do.
+   * *3) Communication:* * Just as languages facilitate communication between people, an ISA facilitates communication between software 
+      and hardware, enabling programs to control the CPU and perform tasks.
 
  ## L3 : From Software Applications to Hardware
 
