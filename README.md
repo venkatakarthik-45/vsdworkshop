@@ -25,13 +25,13 @@
 
 - In the above figure, the chip which is originated in the middle shares the signals to the external world using **PADS**.
 
-**PADS**
+- **PADS**
    Pads are critical for making electrical connections between components and the different parts of a package.
   
-**DIE**
+- **DIE**
    The die is the size of the actual chip within an integrated circuit (IC). It contains the transistors and other electronic components.
   
-**CORE**
+- **CORE**
    A core refers to the main processing unit of a chip. Like all the digital logic takes place. It is a section of the die that performs 
    computing tasks by executing instructions. Modern processors often have multiple cores (e.g., quad-core, octa-core), allowing them to 
    perform multiple tasks simultaneously (multithreading/multiprocessing).
@@ -40,13 +40,14 @@
 
 - A typical chip consists of a SOC, SRAM, ADC, DAC, PLL, and other components. The PLL, ADC, DAC, and SRAM are actually Foundry IPs.
   
-**Foundry**   
+- **Foundry**   
    A foundry is a company that manufactures semiconductor chips for other companies. The foundry doesn't design the chips; it only 
    handles the fabrication process.These companies, like TSMC (Taiwan Semiconductor Manufacturing Company) and GlobalFoundries, 
    specialize in the production of semiconductor chips but do not design their own.
 
-**Foundry IPs (Intellectual Property)**
-   IPs require significant expertise and intelligence to build IP Blocks. It actually refers to pre-designed and verified building blocks 
+- **Foundry IPs (Intellectual Property)**
+   IPs require significant expertise and intelligence to build particular Blocks. It actually refers to pre-designed and verified 
+   building blocks 
   (often called IP blocks) that a foundry offers to chip designers. These IPs help designers accelerate the development of their chips 
    without having to design everything from scratch.
 
