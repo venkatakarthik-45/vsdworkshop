@@ -24,8 +24,33 @@
 ![Screenshot (507)](https://github.com/user-attachments/assets/1d330338-f6a4-42ba-9ece-012f640e2784)
 
 - In the above figure, the chip which is originated in the middle shares the signals to the external world using **PADS**.
-- ### PADS - Pads are critical for making electrical connections between components and the different parts of a package.
 
+**PADS**
+   Pads are critical for making electrical connections between components and the different parts of a package.
+  
+**DIE**
+   The die is the size of the actual chip within an integrated circuit (IC). It contains the transistors and other electronic components.
+  
+**CORE**
+   A core refers to the main processing unit of a chip. Like all the digital logic takes place. It is a section of the die that performs 
+   computing tasks by executing instructions. Modern processors often have multiple cores (e.g., quad-core, octa-core), allowing them to 
+   perform multiple tasks simultaneously (multithreading/multiprocessing).
+
+  ![JNSKJDS](https://github.com/user-attachments/assets/839d3067-abb9-4deb-bd4f-2d1d1726d91d) 
+
+- A typical chip consists of a SOC, SRAM, ADC, DAC, PLL, and other components. The PLL, ADC, DAC, and SRAM are actually Foundry IPs.
+  
+**Foundry**   
+   A foundry is a company that manufactures semiconductor chips for other companies. The foundry doesn't design the chips; it only 
+   handles the fabrication process.These companies, like TSMC (Taiwan Semiconductor Manufacturing Company) and GlobalFoundries, 
+   specialize in the production of semiconductor chips but do not design their own.
+
+**Foundry IPs (Intellectual Property)**
+   IPs require significant expertise and intelligence to build IP Blocks. It actually refers to pre-designed and verified building blocks 
+  (often called IP blocks) that a foundry offers to chip designers. These IPs help designers accelerate the development of their chips 
+   without having to design everything from scratch.
+
+   ![Screenshot (513)](https://github.com/user-attachments/assets/f93cb0a9-f43a-4a57-93e2-4f6445072982)
 
 
 
