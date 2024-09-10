@@ -21,6 +21,11 @@
 
 ![Screenshot (509)](https://github.com/user-attachments/assets/53d8b313-47a6-4261-904c-bcd2b7764f9d)
 
+![Screenshot (507)](https://github.com/user-attachments/assets/1d330338-f6a4-42ba-9ece-012f640e2784)
+
+- In the above figure, the chip which is originated in the middle shares the signals to the external world using **PADS**.
+- ### PADS - Pads are critical for making electrical connections between components and the different parts of a package.
+
 
 
 
