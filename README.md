@@ -174,9 +174,9 @@
 
 ![Screenshot (536)](https://github.com/user-attachments/assets/5eb04d3f-8f95-492b-a15a-8a1a5ac9bcfa)
 
-      1) **Global Placement:** In this initial stage, cells are roughly positioned within the core area, balancing timing and congestion 
+   1) **Global Placement:** In this initial stage, cells are roughly positioned within the core area, balancing timing and congestion 
            constraints. It provides a broad view of the netlist but may not strictly adhere to all placement rules.
-      2) **Detailed Placement:** Here, the exact routes and layers for each netlist are determined, ensuring valid routing while 
+   2) **Detailed Placement:** Here, the exact routes and layers for each netlist are determined, ensuring valid routing while 
            optimizing for area and timing constraints. Minimizing vias and power consumption are also key objectives in this stage.
 
 ![Screenshot (538)](https://github.com/user-attachments/assets/2ba3d11a-e854-4032-bc13-1de6e3ed9065)
