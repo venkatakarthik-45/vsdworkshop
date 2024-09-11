@@ -11,8 +11,8 @@
 
 # Sky130 - Inception of open-source EDA, OpenLANE and Sky130 PDK
 # Section-1 : How to talk to computers
-
 ## L1 - Introduction to QFN-48 Package, chip, pads, core, die, and IPs
+
 - A **PACKAGE** refers to the physical enclosure that surrounds an integrated circuit (IC) or electronic component. It provides both mechanical protection and electrical connections between the component (like a chip or IC) and the circuit board (PCB). The package type is important as it impacts the size, assembly method, and performance of the electronic circuit. So here in our workshop, we use **QFN-48 (Quad Flat No-lead) package**,  It is a type of surface-mount integrated circuit package. The number "48" refers to the number of pins or connections it has, meaning it has 48 leads. These leads are usually exposed on the bottom of the package instead of extending out like traditional leads in other IC packages.
 - A package is the outer shell or enclosure that surrounds the chip (also known as the die) inside. The chip is the actual semiconductor component where all the electronic circuits and functions are embedded, while the package provides the necessary protection and external connections for the chip to communicate with other components on a circuit board. which is shown in the below figure,
 
@@ -228,6 +228,8 @@
 
 OpenLANE is an advanced, open-source framework designed for automating the ASIC (Application-Specific Integrated Circuit) design process. It leverages several key open-source tools to guide a design from RTL (Register Transfer Level) to a finalized GDSII layout. Here is a detailed breakdown of the OpenLANE design flow and its tools:
 
+![Screenshot (545)](https://github.com/user-attachments/assets/dc957a22-2262-4499-855d-a0147e9b3488)
+
 ### Key Open-Source Tools:
 -  Yosys: RTL-to-Gates synthesis tool.
 -  ABC: Logic synthesis and optimization tool.
@@ -260,6 +262,8 @@ OpenLANE is an advanced, open-source framework designed for automating the ASIC 
    -  Automatic Test Pattern Generation (ATPG): Creates test patterns for the design.
    -  Test Pattern Compaction: Reduces the number of test patterns needed.
    -  Fault Coverage and Simulation: Ensures comprehensive fault coverage and simulates test patterns to verify design functionality.
+
+![Screenshot (546)](https://github.com/user-attachments/assets/52bb1616-3b20-44c7-a58f-41ceadc41181)
      
 ### 5. Physical Implementation (Place and Route - PnR):
 -  Tool: OpenROAD
@@ -282,15 +286,36 @@ OpenLANE is an advanced, open-source framework designed for automating the ASIC 
 ### 7. Antenna Rule Violation Handling:
 -  Process: Metal wires can act as antennas, accumulating charges that can damage transistor gates during fabrication.
 -  Preventive Approach: Fake Antenna Diode Insertion Script adds fake antenna diodes next to each cell input after placement. An antenna    checker (MAGIC) runs on the routed layout. If violations are found, fake diodes are replaced with real ones.
+
+![Screenshot (548)](https://github.com/user-attachments/assets/fe9f7243-6110-4fed-a4cd-1692d8331f17)
+![Screenshot (550)](https://github.com/user-attachments/assets/bfdf111f-471d-4e78-ab21-5a3766c289dc)
+
   
 ### 8. Final Verification:
 -  Static Timing Analysis (STA):
 -  Tool: OpenSTA (OpenROAD)
 -  Process: Involves extracting interconnect RC parameters and performing timing analysis to identify any timing violations. Timing         reports are generated to ensure the design meets performance requirements.
+
+![Screenshot (551)](https://github.com/user-attachments/assets/0f7ede8e-29a2-4d9d-aa23-c12ab14f0993)
+
 -  Physical Verification:
     -  Design Rule Checking (DRC): Conducted using MAGIC to ensure the layout adheres to design rules.
     -  Layout vs. Schematic (LVS): MAGIC and Netgen are used to compare the extracted SPICE model from the layout with the Verilog              netlist. This comparison ensures that the layout matches the intended schematic.
+    
+-  One of the most exciting aspects of OpenLANE is its integration with **StriVe**, a family of fully open-source System-on-Chips (SoCs)    that utilizes open-source PDKs, EDA tools, and RTL designs. StriVe exemplifies the power of open collaboration, where every layer        of the SoC, from design to fabrication, is accessible to the public.
+
+![Screenshot (544)](https://github.com/user-attachments/assets/02bd6182-67e5-42af-9c24-8de1ca1090a5)
+  
+-  The ultimate goal of OpenLANE is to generate a clean GDSII file, which is the final representation of the chip design, free from any     issues or violations. When we say “clean,” it means:
+    -  No LVS (Layout vs. Schematic) violations: Ensures the layout corresponds correctly to the design schematic.
+    -  No DRC (Design Rule Check) violations: Ensures the design complies with the fabrication process rules.
+    -  No timing violations: Guarantees that the design meets all timing constraints, which is crucial for the correct operation of             high-speed circuits.
 -  By integrating these tools and processes, OpenLANE provides a robust, automated flow for ASIC design, ensuring accuracy and              efficiency from initial RTL code to final layout.
+
+# Section - 3 Get familiar with open-source EDA tools
+## L1 - OpenLANE Directory structure in detail
+
+
 
      
 
