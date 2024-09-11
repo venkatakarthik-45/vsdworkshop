@@ -314,7 +314,7 @@ OpenLANE is an advanced, open-source framework designed for automating the ASIC 
 -  By integrating these tools and processes, OpenLANE provides a robust, automated flow for ASIC design, ensuring accuracy and              efficiency from initial RTL code to final layout.
 
 # Section - 3 Get familiar with open-source EDA tools
-## L1, L2, L3 - OpenLANE Directory structure in detail, Design Preparation Step and Review files after design prep and run synthesis
+## OpenLANE Directory structure in detail, Design Preparation Step and Review files after design prep and run synthesis
 
 -  Before going into the Openlane Directory structure, lets know about the basic commands which we use in this tool.
 ```
@@ -354,7 +354,13 @@ OpenLANE is an advanced, open-source framework designed for automating the ASIC 
 
 ![image](https://github.com/user-attachments/assets/b81497fa-fa59-4241-a2f2-0f827bb46848)
 
+## Steps to characterize synthesis results
 
+-  How to check the timing report shown in below screenshots
+
+![To check the timing report](https://github.com/user-attachments/assets/e97b137c-c64d-487f-af48-30ebfdbd4fce)
+
+![Timing_report](https://github.com/user-attachments/assets/f889a42f-6847-4d15-853c-b0e002ff1939)
 
    
 
