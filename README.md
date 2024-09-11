@@ -233,66 +233,65 @@
 - Key Stages of the OpenLANE ASIC Design Flow
 
 ### Synthesis:
-Tool: Yosys
-Description: Converts RTL code into a gate-level netlist. This netlist, composed of logic gates, is functionally equivalent to the original RTL design and mapped to standard cells from the target process library, such as SkyWater 130nm.
+-  Tool: Yosys
+-  Description: Converts RTL code into a gate-level netlist. This netlist, composed of logic gates, is functionally equivalent to the       original RTL design and mapped to standard cells from the target process library, such as SkyWater 130nm.
 
 ### Floorplanning:
-Tools: OpenROAD
-Description: Organizes the chip layout by defining component placements and power distribution. 
-It involves:
-  Power Planning: Designing a power network with decoupling capacitors and tap cells.
-  Decoupling Capacitors and Tap Cells Insertion: Ensuring stable power delivery and reducing noise.
+-  Tools: OpenROAD
+-  Description: Organizes the chip layout by defining component placements and power distribution. 
+-  It involves:
+    > Power Planning: Designing a power network with decoupling capacitors and tap cells.
+    > Decoupling Capacitors and Tap Cells Insertion: Ensuring stable power delivery and reducing noise.
 
 ### Placement:
-Tools: OpenROAD
-Description: Positions standard cells on the chip:
-  Global Placement: Initial placement to minimize congestion and timing issues.
-  Detailed Placement: Refines cell positions to optimize routing and meet timing constraints.
+-  Tools: OpenROAD
+-  Description: Positions standard cells on the chip:
+    > Global Placement: Initial placement to minimize congestion and timing issues.
+    > Detailed Placement: Refines cell positions to optimize routing and meet timing constraints.
 
 ### Clock Tree Synthesis (CTS):
-Tools: OpenROAD
-Description: Distributes the clock signal to sequential elements like flip-flops and registers, minimizing clock skew and ensuring synchronous operation across the chip.
+-  Tools: OpenROAD
+-  Description: Distributes the clock signal to sequential elements like flip-flops and registers, minimizing clock skew and ensuring       synchronous operation across the chip.
 
 ### Routing:
-Tools: OpenROAD
-Description: Connects cells using metal layers
-  Global Routing: Determines general routing paths.
-  Detailed Routing: Finalizes metal tracks, ensuring design rules compliance and optimizing performance.
+-  Tools: OpenROAD
+-  Description: Connects cells using metal layers
+    > Global Routing: Determines general routing paths.
+    > Detailed Routing: Finalizes metal tracks, ensuring design rules compliance and optimizing performance.
 
 ### Design for Test (DFT):
-Description: Enhances testability by:
-  Scan Insertion: Adding scan chains for easier testing.
-  Automatic Test Pattern Generation (ATPG): Creating test patterns.
-  Test Pattern Compaction: Reducing the number of patterns.
-  Fault Coverage and Simulation: Ensuring faults are detected and analyzed.
+-  Description: Enhances testability by:
+    > Scan Insertion: Adding scan chains for easier testing.
+    > Automatic Test Pattern Generation (ATPG): Creating test patterns.
+    > Test Pattern Compaction: Reducing the number of patterns.
+    > Fault Coverage and Simulation: Ensuring faults are detected and analyzed.
   
 ### Post-Placement Optimization:
-Description: Further refine the design after initial placement to enhance performance and meet timing constraints.
+-  Description: Further refine the design after initial placement to enhance performance and meet timing constraints.
 
 ### Static Timing Analysis (STA):
-Tools: OpenSTA (part of OpenROAD)
-Description: Analyzes timing by extracting interconnect RC parameters and ensuring that the design meets all timing requirements.
+-  Tools: OpenSTA (part of OpenROAD)
+-  Description: Analyzes timing by extracting interconnect RC parameters and ensuring that the design meets all timing requirements.
 
 ### Physical Verification:
-Tools: Magic, Netgen
-Description: Validates the final design:
-  Design Rule Checking (DRC): MAGIC is used to check design rules and ensure compliance with manufacturing constraints.
-  SPICE Extraction: MAGIC extracts SPICE models from the layout for detailed analysis.
-  Layout vs. Schematic (LVS): MAGIC and Netgen are used to compare the extracted SPICE models with the Verilog netlist, ensuring that      the layout matches the schematic design.
+-  Tools: Magic, Netgen
+-  Description: Validates the final design:
+    > Design Rule Checking (DRC): MAGIC is used to check design rules and ensure compliance with manufacturing constraints.
+    > SPICE Extraction: MAGIC extracts SPICE models from the layout for detailed analysis.
+    > Layout vs. Schematic (LVS): MAGIC and Netgen are used to compare the extracted SPICE models with the Verilog netlist, ensuring           that the layout matches the schematic design.
 
 ### Antenna Rule Violation Handling:
-Description: Prevents issues caused by metal wires acting as antennas:
-Preventive Measures: Fake antenna diodes are added during placement. An antenna checker is used post-routing, and fake diodes are replaced with real ones if necessary.
+-  Description: Prevents issues caused by metal wires acting as antennas
+-  Preventive Measures: Fake antenna diodes are added during placement. An antenna checker is used post-routing, and fake diodes are        replaced with real ones if necessary.
 
 ### Sign-off and Final GDSII Output:
-Description: Generates the final GDSII layout, which is ready for chip fabrication.
+-  Description: Generates the final GDSII layout, which is ready for chip fabrication.
 
 - Regression Testing: OpenLANE performs regression testing by running the flow on approximately 70 designs and comparing results to 
   known benchmarks. This ensures the flow's accuracy and reliability.
-- Modes of Operation:
-   OpenLANE supports:
-    Autonomous Mode: Automated, "push-button" operation for quick design.
-    Interactive Mode: Step-by-step execution for detailed control.
+- Modes of Operation: OpenLANE supports:
+    > Autonomous Mode: Automated, "push-button" operation for quick design.
+    > Interactive Mode: Step-by-step execution for detailed control.
      
 
 
