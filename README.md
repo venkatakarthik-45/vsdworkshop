@@ -113,7 +113,8 @@
    
 ![Screenshot (522)](https://github.com/user-attachments/assets/f362374f-6045-4fe8-a49f-971d54dd2e2d)
 
-  # Section-2 : SoC design and OpenLANE
+# Section-2 : SoC design and OpenLANE
+## L1 - Introduction to all components of open-source digital ASIC design
 
 
      
