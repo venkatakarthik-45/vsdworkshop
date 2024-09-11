@@ -129,7 +129,7 @@
   boards (PCBs), and other electronic systems. Several open-source EDA tools, like Qflow, OpenROAD, and OpenLANE, are available. Today, 
   I focused on OpenLANE, which is particularly effective for open-source digital ASIC design. These tools are central to automating and 
   verifying the design process.
-###PDK Data: 
+### PDK Data: 
 - The Process Design Kit (PDK) is an essential interface between the fabrication process (FAB) and the design stage. The PDK includes 
   collections of files such as process design rules (DRC, LVS, REX), digital standard cell libraries, and I/O libraries, which are used 
   by EDA tools to model and simulate IC fabrication.
