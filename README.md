@@ -157,11 +157,74 @@
 
 ![Screenshot (530)](https://github.com/user-attachments/assets/4498f11e-325a-4a74-8562-f0deaf55b986)  ![Screenshot (531)](https://github.com/user-attachments/assets/8651bc6c-556e-4b98-919d-31d39cac7745)
 
+### Floor/Power Planning:
+- In this stage, The planning of the silicon area and distributing power across the entire circuit takes place. At the chip level floor 
+  planning involves dividing the chip die into different blocks and positioning the I/O pads. In micro-level floor planning involves 
+  dimensions, pin locations, and rows are defined. Power planning is also crucial here, where the power distribution network is 
+  constructed, typically using multiple VDD and GND lines. Metal strips are laid horizontally and vertically in parallel to minimize 
+  resistance, with upper metal layers (which are thicker and more resistant to electromigration) being preferred for power distribution.
+
+![Screenshot (534)](https://github.com/user-attachments/assets/fa4299ae-c50e-42b6-9762-ff79c4c4880d)
+![Screenshot (533)](https://github.com/user-attachments/assets/a7fc7e24-c2ba-4425-a4d4-56fde156182a)
+![Screenshot (535)](https://github.com/user-attachments/assets/50091cd1-5e13-4045-9267-cd79ca639231)
+
+### Placement: 
+- The next step is to place the gate-level netlist onto the floor-planned rows, aligning them with the available sites. Cells should be 
+  placed as closely as possible to minimize interconnect delays. Placement is typically divided into two stages:
+
+![Screenshot (536)](https://github.com/user-attachments/assets/5eb04d3f-8f95-492b-a15a-8a1a5ac9bcfa)
+
+      1) **Global Placement:** In this initial stage, cells are roughly positioned within the core area, balancing timing and congestion 
+           constraints. It provides a broad view of the netlist but may not strictly adhere to all placement rules.
+      2) **Detailed Placement:** Here, the exact routes and layers for each netlist are determined, ensuring valid routing while 
+           optimizing for area and timing constraints. Minimizing vias and power consumption are also key objectives in this stage.
+
+![Screenshot (538)](https://github.com/user-attachments/assets/2ba3d11a-e854-4032-bc13-1de6e3ed9065)
+
+### Clock Tree Synthesis (CTS): 
+- Before signal routing, the clock must be routed. Clock tree synthesis ensures that the clock is distributed to all sequential 
+  elements, such as flip-flops and registers. The clock network resembles a tree, with the clock source at the root and the sequential 
+  elements at the leaves. The goal of CTS is to minimize clock skew while ensuring the clock network maintains good shape and 
+  performance. Typically, H-trees or X-trees are used to reduce skew, with some devices offering specialized global routing resources to 
+  further optimize clock signal distribution.
+  
+    **Clock Skew & Clock Jitter :** Clock skew is two different flip flops receive the clock signal at slightly different times due to 
+      differences in clock net length but clock jitter is on the same flip flop but the position of the clock edge moves edge to edge 
+      due to some noise in oscillator. 
+
+![Screenshot (539)](https://github.com/user-attachments/assets/19b6e017-d831-4220-a491-8fed042befff)
+
+### Routing: 
+- Once the clock is routed, the signal routing begins. This involves making physical connections between signal pins using metal layers. 
+  Signal routing is divided into two parts:
+
+       1) **Global Routing:** This step generates guides for routing the signals.
+
+       2) **Detailed Routing:** The actual physical connections (wires) are implemented using these guides. Special attention is given 
+            to the clock and power/ground nets. The Sky130 PDK defines six routing layers, with the lowest being the local interconnect 
+            layer made of titanium nitride, and the remaining five layers being aluminum.
+
+![Screenshot (541)](https://github.com/user-attachments/assets/12ce3eed-42f4-47ad-bea3-013b2505f423)
+
+- As the Routing grid is huge,  A divide-and-conquer approach is used to handle the large routing grids effectively. first global 
+  routing is performed then detail routing uses the fine grids and the routing guides to implement the actual wiring.
+
+![Screenshot (543)](https://github.com/user-attachments/assets/92e56365-c494-4b69-a698-453fa4789d8d)
 
 
+### Sign-Off: 
+- After routing, the final layout is constructed, and the design enters the verification phase. There are two key types of verification:
+
+       1) **Physical Verification:** This checks the design for adherence to fabrication rules through Design Rule Checking (DRC) and 
+            Layout vs. Schematic (LVS) verification.
+
+       2) **Timing Verification:** Static Timing Analysis (STA) ensures that the design meets timing constraints across all operating 
+            conditions.
+
+![Screenshot (542)](https://github.com/user-attachments/assets/c49d4e33-1907-4195-b0f9-d9478a065d86)
 
 
-
+## L3 - Introduction to OpenLANE and Strive chipsets
 
 
      
