@@ -292,15 +292,16 @@ OpenLANE is an advanced, open-source framework designed for automating the ASIC 
 
   
 ### 8. Final Verification:
--  Static Timing Analysis (STA):
--  Tool: OpenSTA (OpenROAD)
--  Process: Involves extracting interconnect RC parameters and performing timing analysis to identify any timing violations. Timing         reports are generated to ensure the design meets performance requirements.
+-  Timing Verification:
+  -  Static Timing Analysis (STA)
+      -  Tool: OpenSTA (OpenROAD)
+      -  Process: Involves extracting interconnect RC parameters and performing timing analysis to identify any timing violations.                Timing reports are generated to ensure the design meets performance requirements.
 
 ![Screenshot (551)](https://github.com/user-attachments/assets/0f7ede8e-29a2-4d9d-aa23-c12ab14f0993)
 
--  Physical Verification:
-    -  Design Rule Checking (DRC): Conducted using MAGIC to ensure the layout adheres to design rules.
-    -  Layout vs. Schematic (LVS): MAGIC and Netgen are used to compare the extracted SPICE model from the layout with the Verilog              netlist. This comparison ensures that the layout matches the intended schematic.
+  -  Physical Verification:
+      -  Design Rule Checking (DRC): Conducted using MAGIC to ensure the layout adheres to design rules.
+      -  Layout vs. Schematic (LVS): MAGIC and Netgen are used to compare the extracted SPICE model from the layout with the Verilog              netlist. This comparison ensures that the layout matches the intended schematic.
     
 -  One of the most exciting aspects of OpenLANE is its integration with **StriVe**, a family of fully open-source System-on-Chips (SoCs)    that utilizes open-source PDKs, EDA tools, and RTL designs. StriVe exemplifies the power of open collaboration, where every layer        of the SoC, from design to fabrication, is accessible to the public.
 
