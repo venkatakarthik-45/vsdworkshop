@@ -143,7 +143,26 @@
 
 ![Screenshot (526)](https://github.com/user-attachments/assets/99d28ef2-8db9-4ce4-bfa8-40fa8e3126c8)
 
-  
+## L2 - Simplified RTL2GDS flow 
+- The  simplifying RTL to GDSII flow, breaking it down step by step to streamline the understanding of this complex process. Below is an 
+  Outline the major phases involved in this flow.
+
+![Screenshot (529)](https://github.com/user-attachments/assets/c0f09633-6584-420a-9bcf-d10ce48342ed)
+
+### Synthesis: 
+- The synthesis phase converts the RTL design into a circuit, leveraging the standard cell library (SCL). The end result is a gate-level 
+  netlist that represents the same functionality as the RTL but at a lower abstraction level. This netlist, described in hardware 
+  description languages (HDL) like Verilog or VHDL, connects standard cells, which have regular layouts akin to electrical components, 
+  such as HDL, SPICE models, etc.
+
+![Screenshot (530)](https://github.com/user-attachments/assets/4498f11e-325a-4a74-8562-f0deaf55b986)  ![Screenshot (531)](https://github.com/user-attachments/assets/8651bc6c-556e-4b98-919d-31d39cac7745)
+
+
+
+
+
+
+
 
      
 
