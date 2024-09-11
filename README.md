@@ -8,8 +8,10 @@
 
 
 # DAY-1 
+
 # Sky130 - Inception of open-source EDA, OpenLANE and Sky130 PDK
-# How to talk to computers
+# Section-1 : How to talk to computers
+
 ## L1 - Introduction to QFN-48 Package, chip, pads, core, die, and IPs
 - A **PACKAGE** refers to the physical enclosure that surrounds an integrated circuit (IC) or electronic component. It provides both mechanical protection and electrical connections between the component (like a chip or IC) and the circuit board (PCB). The package type is important as it impacts the size, assembly method, and performance of the electronic circuit. So here in our workshop, we use **QFN-48 (Quad Flat No-lead) package**,  It is a type of surface-mount integrated circuit package. The number "48" refers to the number of pins or connections it has, meaning it has 48 leads. These leads are usually exposed on the bottom of the package instead of extending out like traditional leads in other IC packages.
 - A package is the outer shell or enclosure that surrounds the chip (also known as the die) inside. The chip is the actual semiconductor component where all the electronic circuits and functions are embedded, while the package provides the necessary protection and external connections for the chip to communicate with other components on a circuit board. which is shown in the below figure,
@@ -111,7 +113,9 @@
    
 ![Screenshot (522)](https://github.com/user-attachments/assets/f362374f-6045-4fe8-a49f-971d54dd2e2d)
 
-   
+  # Section-2 : SoC design and OpenLANE
+
+
      
 
 
