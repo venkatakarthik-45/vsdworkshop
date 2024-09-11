@@ -317,27 +317,27 @@ OpenLANE is an advanced, open-source framework designed for automating the ASIC 
 ## L1, L2, L3 - OpenLANE Directory structure in detail, Design Preparation Step and Review files after design prep and run synthesis
 
 -  Before going into the Openlane Directory structure, lets know about the basic commands which we use in this tool.
-
+```
 -  cd : Change directory
 -  ls -ltr : List everything in chronological order
 -  ls -help : list all the commands and its meaning
 -  clear : clearning everything.
-
+```
 -  Coming to the OpenLane Directory,
-  ```
+  
 -    Open the terminal window and first, we need to change our current directory to openlane directory which is shown below.
-   -  `cd Desktop/work/tools/openlane_working_dir/openlane` 
+     `cd Desktop/work/tools/openlane_working_dir/openlane` 
 -    Next we need to type docker 
-  -  `docker`
+    `docker`
 -    Now we are in OpenLane flow with the docker sub-system. we need to Call on interactive mode using the below command
-  -  `./flow.tcl -interactive`
+    `./flow.tcl -interactive`
 -    Now in this mode, we need to add our package for our design using OpenLane flow using the following command
-  -  `package require openlane 0.9`
+     `package require openlane 0.9`
 -    Right now, our package is created and openlane is ready to design, but to design it and generate reports and results we need to          create one folder which is **picorv32a**
-  -  `prep -design picorv32a`  
+     `prep -design picorv32a`  
 -    After doing the above step you will get the output as **Preparation successful**. After getting that you need to proceed with            the below command. Finally, we need to run synthesis for our design using the following command. The output for this command             shows that **Synthesis successful**
-  -  `run_synthesis` 
-  ```
+     `run_synthesis` 
+  
 
 -  I have shared every screenshot below for the above process. Make sure While executing those commands you need to get the exact output    that is shown in screenshots
 
