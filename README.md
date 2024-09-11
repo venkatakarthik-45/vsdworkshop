@@ -323,17 +323,17 @@ OpenLANE is an advanced, open-source framework designed for automating the ASIC 
 -  clear : clearning everything.
 
 -  Coming to the OpenLane Directory, 
-1  -  Open the terminal window and first we need to change our current directory to openlane directory which is shown below.
+-  -  Open the terminal window and first we need to change our current directory to openlane directory which is shown below.
    `cd Desktop/work/tools/openlane_working_dir/openlane` 
-2  -  Next we need to type docker 
+-  -  Next we need to type docker 
   `docker`
-3  -  Now we are in OpenLane flow with the docker sub-system. we need to Call on interactive mode using the below command
+-  -  Now we are in OpenLane flow with the docker sub-system. we need to Call on interactive mode using the below command
   `./flow.tcl -interactive`
-4  -  Now in this mode, we need to add our package for our design using OpenLane flow using the following command
+-  -  Now in this mode, we need to add our package for our design using OpenLane flow using the following command
     `package require openlane 0.9`
-5  -  Right now, our package is created and openlane is ready to design, but to design it and generate reports and results we need to          create one folder which is **picorv32a**
+-  -  Right now, our package is created and openlane is ready to design, but to design it and generate reports and results we need to          create one folder which is **picorv32a**
   `prep -design picorv32a`  
-6  -  After doing the above step you will get the output as **Preparation successful**. After getting that you need to proceed with            the below command. Finally, we need to run synthesis for our design using the following command. The output for this command             shows that **Synthesis successful**
+-  -  After doing the above step you will get the output as **Preparation successful**. After getting that you need to proceed with            the below command. Finally, we need to run synthesis for our design using the following command. The output for this command             shows that **Synthesis successful**
   `run_synthesis` 
 
 -  I have shared every screenshot below for the above process. Make sure While executing those commands you need to get the exact output    that is shown in screenshots
