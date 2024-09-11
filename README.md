@@ -323,17 +323,17 @@ OpenLANE is an advanced, open-source framework designed for automating the ASIC 
 -  clear : clearning everything.
 
 -  Coming to the OpenLane Directory, 
->  Open the terminal window and first we need to change our current directory to openlane directory which is shown in below.
+>  -  Open the terminal window and first we need to change our current directory to openlane directory which is shown in below.
   `cd Desktop/work/tools/openlane_working_dir/openlane` 
->  Next we need to type docker
+>  -  Next we need to type docker
   `docker`
->  Now we are in OpenLane flow with the docker sub-system. we need to Call on interactive mode using the below command
+>  -  Now we are in OpenLane flow with the docker sub-system. we need to Call on interactive mode using the below command
   `./flow.tcl -interactive`
-> Now in this mode, we need to add our package for our design using OpenLane flow using the following command
+>  -  Now in this mode, we need to add our package for our design using OpenLane flow using the following command
   `package require openlane 0.9`
->  Right now, our package is created and openlane is ready to design, but to design it and generate reports and results we need to          create one folder which is **picorv32a**
+>  -  Right now, our package is created and openlane is ready to design, but to design it and generate reports and results we need to          create one folder which is **picorv32a**
   `prep -design picorv32a`  
-> Here after doing the above step you will get the output as **Preparation successful**. After getting that you need to proceed with the   below command. Finally, we need to run synthesis for our design using the following command. The output for this command shows that      **Synthesis successful**
+>  -  After doing the above step you will get the output as **Preparation successful**. After getting that you need to proceed with            the below command. Finally, we need to run synthesis for our design using the following command. The output for this command shows       that **Synthesis successful**
   `run_synthesis`
 
 -  I have shared every screenshot below for the above process. Make sure While executing those commands you need to get the exact output    that is shown in screenshots
@@ -343,6 +343,9 @@ OpenLANE is an advanced, open-source framework designed for automating the ASIC 
 ![ol7](https://github.com/user-attachments/assets/26f49f56-3251-4297-b4fb-4477cce95df6)
 
 -  After completing the synthesis step, we need to calculate the flop ratio which is shown below,
+-  To check the values, you just need to scroll up after your successful synthesis run. As shown in the above 3rd snapshot, there is a      line highlighted which is **Chip area for module `\picorv32a`: 147712.918400**. Above that you can see the Highlighted values shown      in the figure.  
+
+![ol8](https://github.com/user-attachments/assets/b7062491-2095-41d6-9ea3-2e6ece7b7caa)
 
 ![image](https://github.com/user-attachments/assets/6966c58e-e726-47c5-80e9-314d764ea07b)
 
