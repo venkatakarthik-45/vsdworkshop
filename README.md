@@ -226,22 +226,34 @@
 
 ## L3 & L4 - Introduction to OpenLANE detailed ASIC design flow and Strive chipsets
 
-OpenLANE is an advanced, open-source framework designed for automating the ASIC (Application-Specific Integrated Circuit) design process. It leverages several key open-source tools to guide a design from RTL (Register Transfer Level) to a finalized GDSII layout. Here is a detailed breakdown of the OpenLANE design flow:
+OpenLANE is an advanced, open-source framework designed for automating the ASIC (Application-Specific Integrated Circuit) design process. It leverages several key open-source tools to guide a design from RTL (Register Transfer Level) to a finalized GDSII layout. Here is a detailed breakdown of the OpenLANE design flow and its tools:
 
-1. RTL to Logic Circuit Conversion:
+### Key Open-Source Tools:
+-  Yosys: RTL-to-Gates synthesis tool.
+-  ABC: Logic synthesis and optimization tool.
+-  OpenROAD: Complete toolchain for physical design automation, including floorplanning, placement, clock tree synthesis, and routing.
+-  MAGIC: VLSI layout tool used for Design Rule Checking (DRC) and Layout vs. Schematic (LVS) checks.
+-  Netgen: Tool for LVS, comparing SPICE extracted from layout with Verilog netlist.
+-  OpenSTA: Static Timing Analysis (STA) tool.
+-  KLayout: Layout viewer and editor.
+-  Fault: Tool for Design for Test (DFT) tasks, including scan insertion and ATPG (Automatic Test Pattern Generation).
+-  Qflow: Toolchain for digital synthesis and placement/routing
+
+
+### 1. RTL to Logic Circuit Conversion:
 -  Tool: Yosys
 -  Process: The design starts with RTL code, which is processed by Yosys. Yosys translates the RTL description into a logic circuit         representation using various digital components.
 -  Optimization and Mapping: This logic circuit is then optimized and mapped into standard cells from a synthesis library using ABC. ABC    requires guidance via an ABC Script, which defines synthesis strategies aimed at either minimizing area or optimizing timing. The        selection of strategies depends on design objectives.
   
-2. Synthesis Exploration:
+### 2. Synthesis Exploration:
 -  Purpose: To evaluate different synthesis strategies and their impact on design delay and area.
 -  Utility: The Synthesis Exploration Utility generates reports that compare the effects of various strategies. These reports help          identify the most effective strategy for the design.
   
-3. Design Exploration and Regression Testing:
+### 3. Design Exploration and Regression Testing:
 -  Tool: Design Exploration Utility
 -  Process: This utility performs design configuration sweeps to identify optimal settings. It produces reports showing the design          matrix and layout violations. This exploration is crucial for finding the best configurations and is also used for regression testing    by comparing results from approximately 70 designs against established benchmarks.
   
-4. Design for Test (DFT):
+### 4. Design for Test (DFT):
 -  Tool: Fault
 -  Purpose: To prepare the design for testing post-fabrication. This optional step includes:
    -  Scan Insertion: Incorporates scan chains to facilitate testing.
@@ -249,7 +261,7 @@ OpenLANE is an advanced, open-source framework designed for automating the ASIC 
    -  Test Pattern Compaction: Reduces the number of test patterns needed.
    -  Fault Coverage and Simulation: Ensures comprehensive fault coverage and simulates test patterns to verify design functionality.
      
-5. Physical Implementation (Place and Route - PnR):
+### 5. Physical Implementation (Place and Route - PnR):
 -  Tool: OpenROAD
 -  Steps:
     -  Floor/Power Planning: Defines the chip layout and plans power distribution across the design.
@@ -263,15 +275,15 @@ OpenLANE is an advanced, open-source framework designed for automating the ASIC 
     -  Global Routing: Establishes general routing paths for connections.
     -  Detailed Routing: Finalizes metal tracks to connect standard cells, macros, and I/O pins.
       
-6. Logic Equivalence Checking (LEC):
+### 6. Logic Equivalence Checking (LEC):
 -  Tool: Yosys
 -  Purpose: To ensure that the netlist resulting from physical implementation is functionally equivalent to the original gate-level         netlist from synthesis. This is crucial as the netlist may be modified during various stages of physical implementation.
   
-7. Antenna Rule Violation Handling:
+### 7. Antenna Rule Violation Handling:
 -  Process: Metal wires can act as antennas, accumulating charges that can damage transistor gates during fabrication.
 -  Preventive Approach: Fake Antenna Diode Insertion Script adds fake antenna diodes next to each cell input after placement. An antenna    checker (MAGIC) runs on the routed layout. If violations are found, fake diodes are replaced with real ones.
   
-8. Final Verification:
+### 8. Final Verification:
 -  Static Timing Analysis (STA):
 -  Tool: OpenSTA (OpenROAD)
 -  Process: Involves extracting interconnect RC parameters and performing timing analysis to identify any timing violations. Timing         reports are generated to ensure the design meets performance requirements.
