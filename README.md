@@ -116,6 +116,34 @@
 # Section-2 : SoC design and OpenLANE
 ## L1 - Introduction to all components of open-source digital ASIC design
 
+![Screenshot (524)](https://github.com/user-attachments/assets/7b638600-88ba-45ea-afbd-382ef803b7d7)
+
+- The components of open-source digital ASIC design involve as follows,
+### RTL Design: 
+  - Register-Transfer Level (RTL) is a critical design abstraction that models the flow of digital signals between hardware 
+    registers in a synchronous digital circuit. The logical operations performed on these signals are also part of this model. A variety 
+    of open-source platforms are available for RTL design, including Librecores, Opencores, and repositories on GitHub. These resources 
+    have been instrumental in accelerating my understanding of RTL design.
+### EDA Tools: 
+- Electronic Design Automation (EDA) refers to the suite of tools used to design and verify integrated circuits (ICs), printed circuit 
+  boards (PCBs), and other electronic systems. Several open-source EDA tools, like Qflow, OpenROAD, and OpenLANE, are available. Today, 
+  I focused on OpenLANE, which is particularly effective for open-source digital ASIC design. These tools are central to automating and 
+  verifying the design process.
+###PDK Data: 
+- The Process Design Kit (PDK) is an essential interface between the fabrication process (FAB) and the design stage. The PDK includes 
+  collections of files such as process design rules (DRC, LVS, REX), digital standard cell libraries, and I/O libraries, which are used 
+  by EDA tools to model and simulate IC fabrication.
+
+![Screenshot (525)](https://github.com/user-attachments/assets/bde588ef-09f4-40c4-8177-2251a6506409)
+
+- An example of an open-source PDK is the SkyWater 130nm process, released in collaboration with Google in 2020. Though newer 
+  fabrication technologies, like the cutting-edge 5nm process, are available, the 130nm process remains relevant for many applications 
+  due to its lower cost and sufficient processing speed for most use cases. For example, Intel’s P4EE @ 3.46 GHz (released in Q4 '04) 
+  and Sky130_OSU (a single-cycle RV32i CPU) pipeline can achieve over 1 GHz clock speeds using this technology.
+
+![Screenshot (526)](https://github.com/user-attachments/assets/99d28ef2-8db9-4ce4-bfa8-40fa8e3126c8)
+
+  
 
      
 
