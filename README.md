@@ -240,14 +240,14 @@
 -  Tools: OpenROAD
 -  Description: Organizes the chip layout by defining component placements and power distribution. 
 -  It involves:
-    > Power Planning: Designing a power network with decoupling capacitors and tap cells.
-    > Decoupling Capacitors and Tap Cells Insertion: Ensuring stable power delivery and reducing noise.
+    - Power Planning: Designing a power network with decoupling capacitors and tap cells.
+    - Decoupling Capacitors and Tap Cells Insertion: Ensuring stable power delivery and reducing noise.
 
 ### Placement:
 -  Tools: OpenROAD
 -  Description: Positions standard cells on the chip:
-    > Global Placement: Initial placement to minimize congestion and timing issues.
-    > Detailed Placement: Refines cell positions to optimize routing and meet timing constraints.
+    - Global Placement: Initial placement to minimize congestion and timing issues.
+    - Detailed Placement: Refines cell positions to optimize routing and meet timing constraints.
 
 ### Clock Tree Synthesis (CTS):
 -  Tools: OpenROAD
@@ -256,15 +256,15 @@
 ### Routing:
 -  Tools: OpenROAD
 -  Description: Connects cells using metal layers
-    > Global Routing: Determines general routing paths.
-    > Detailed Routing: Finalizes metal tracks, ensuring design rules compliance and optimizing performance.
+    - Global Routing: Determines general routing paths.
+    - Detailed Routing: Finalizes metal tracks, ensuring design rules compliance and optimizing performance.
 
 ### Design for Test (DFT):
 -  Description: Enhances testability by:
-    > Scan Insertion: Adding scan chains for easier testing.
-    > Automatic Test Pattern Generation (ATPG): Creating test patterns.
-    > Test Pattern Compaction: Reducing the number of patterns.
-    > Fault Coverage and Simulation: Ensuring faults are detected and analyzed.
+    - Scan Insertion: Adding scan chains for easier testing.
+    - Automatic Test Pattern Generation (ATPG): Creating test patterns.
+    - Test Pattern Compaction: Reducing the number of patterns.
+    - Fault Coverage and Simulation: Ensuring faults are detected and analyzed.
   
 ### Post-Placement Optimization:
 -  Description: Further refine the design after initial placement to enhance performance and meet timing constraints.
@@ -276,9 +276,9 @@
 ### Physical Verification:
 -  Tools: Magic, Netgen
 -  Description: Validates the final design:
-    > Design Rule Checking (DRC): MAGIC is used to check design rules and ensure compliance with manufacturing constraints.
-    > SPICE Extraction: MAGIC extracts SPICE models from the layout for detailed analysis.
-    > Layout vs. Schematic (LVS): MAGIC and Netgen are used to compare the extracted SPICE models with the Verilog netlist, ensuring           that the layout matches the schematic design.
+    - Design Rule Checking (DRC): MAGIC is used to check design rules and ensure compliance with manufacturing constraints.
+    - SPICE Extraction: MAGIC extracts SPICE models from the layout for detailed analysis.
+    - Layout vs. Schematic (LVS): MAGIC and Netgen are used to compare the extracted SPICE models with the Verilog netlist, ensuring           that the layout matches the schematic design.
 
 ### Antenna Rule Violation Handling:
 -  Description: Prevents issues caused by metal wires acting as antennas
@@ -290,8 +290,8 @@
 - Regression Testing: OpenLANE performs regression testing by running the flow on approximately 70 designs and comparing results to 
   known benchmarks. This ensures the flow's accuracy and reliability.
 - Modes of Operation: OpenLANE supports:
-    > Autonomous Mode: Automated, "push-button" operation for quick design.
-    > Interactive Mode: Step-by-step execution for detailed control.
+    - Autonomous Mode: Automated, "push-button" operation for quick design.
+    - Interactive Mode: Step-by-step execution for detailed control.
      
 
 
