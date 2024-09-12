@@ -362,6 +362,12 @@ OpenLANE is an advanced, open-source framework designed for automating the ASIC 
 
 ![Timing_report](https://github.com/user-attachments/assets/f889a42f-6847-4d15-853c-b0e002ff1939)
 
+
+# Day-2 Good floorplan vs bad floorplan and introduction to library cells
+# SKY130 - Chip Floor planning considerations
+## L1 - Utilization factor and aspect ratio
+
+
    
 
 
