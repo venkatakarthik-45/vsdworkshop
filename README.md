@@ -519,3 +519,88 @@ OpenLANE is an advanced, open-source framework designed for automating the ASIC 
   
 -  Mesh Power Distribution: To address the issues of ground bounce and voltage drop, a mesh power distribution system can be                implemented. This involves using multiple power supply points throughout the design. Each block of the circuitry draws power from the    nearest supply and returns the charge to the nearest ground point. This approach minimizes voltage drops and reduces ground bounce,      leading to more stable and reliable operation.
 
+## Pin Placement and logical cell placement blockage 
+
+### Pin Placement
+
+-  Pin placement refers to the strategic positioning of input/output (I/O) pins on a chip's physical layout.
+-  Proper pin placement is critical for optimizing signal integrity, reducing wire lengths, and minimizing congestion in routing paths.
+-  It has a significant impact on the chip's performance, power consumption, and manufacturability.
+-  The front-end Team defines the netlist, which outlines the logical connections between different components and determines the data      flow.
+-  While the Back-End Team takes the netlist and physically places the pins on the chip, ensuring that the pin locations align with         physical design constraints.
+
+-  Let’s consider a design where we have two circuits operating on separate clocks. The first circuit is driven by clk1 and the second      by clk2, with each circuit receiving distinct inputs: Din1 for the first and Din2 for the second. The outputs of these circuits are      Dout1 and Dout2, respectively. Additionally, there are pre-placed cells within the design: Block A, which takes inputs from both Din1    and Din2, and Block B, which receives inputs from both clk1 and clk2, generating a clock output ClkOut.
+
+![Screenshot (596)](https://github.com/user-attachments/assets/c918993e-fb1d-4b0e-94ec-f7ca6d450c86)
+![Screenshot (597)](https://github.com/user-attachments/assets/52788037-f8ed-4e9c-8e90-10a425db23af)
+
+-  In this design, we have four input ports (Din1, Din2, clk1, clk2) and three output ports (Dout1, ClkOut, Dout2).
+
+-  Now, consider another design to be implemented. This new configuration, which involves a total of six input ports and five output        ports, is particularly useful for understanding timing analysis between different clocks. The connections between the various gates      are described in a netlist, coded in VHDL or Verilog, which defines the relationship between all the components.
+
+![Screenshot (598)](https://github.com/user-attachments/assets/8b320ba0-fd61-429c-bc12-9bfcb7e89909)
+![Screenshot (599)](https://github.com/user-attachments/assets/6a400dda-e07f-4002-8a28-38c40f92a041)
+
+-  Once we’ve generated the netlist, we can integrate it into the previously designed core and focus on the layout. The space between       the core and die will be used for pin placement. In this phase, the front-end team defines the connectivity of the netlist, including    inputs and outputs, while the back-end team is responsible for determining the optimal pin placements. Based on these placements,        pre-placed blocks should be positioned close to their corresponding input sources to minimize routing complexity and improve             performance.
+
+![Screenshot (600)](https://github.com/user-attachments/assets/14d0fd8e-272a-4341-908c-89c56a7ea517)
+
+-  The clock ports appear bigger in size compared to the I/O ports because the clock is continuously driven by the cells. It                continuously sends signals to the flops, effectively driving the entire chip. Therefore, we need a path with the least resistance for    clock pins. The larger the size, the lower the resistance.
+
+### Logical cell placement blockage
+
+-  We have finished pin placement and now we need to ensure that none of the automated placement and routing tools place any cells in a     specific area. This area should be blocked by the routing tool. 
+-  Up to this point, we have implemented blockage for logical cell placement to prevent any cells from being placed in this area. This      ensures that the automated placement and routing tool does not place any cells in the reserved pin locations.
+
+![Screenshot (602)](https://github.com/user-attachments/assets/9d9643d0-a53a-4e9a-aa77-0239b6995fb9)
+
+
+## Steps to Run Floor plan using OpenLANE
+
+-  Before we proceed with the actual floor plan, we need to set up the switches required for this floor plan.
+-  In the floorplanning stage, designers need to carefully configure certain parameters, commonly referred to as switches, which            directly impact the layout and functionality of the chip. These switches control various aspects of the design and can significantly     alter the floorplan when adjusted. Two key parameters that are often considered as switches are the Utilization Factor and Aspect        Ratio.
+-  Before beginning the floorplanning process, designers must cross-check all switches to ensure they are correctly configured and          aligned with the project specifications. Misconfigured switches can lead to inefficient use of space, poor routing, or failure to        meet timing and power goals.
+-  Command to run Floor plan
+
+          run_floorplan
+
+![floorplan success](https://github.com/user-attachments/assets/7688151b-7f2f-44ca-9000-94d09e14ded9)
+![global variables](https://github.com/user-attachments/assets/1cfa9592-8d8c-4f2d-9000-3ba399abe9d6)
+
+-  Once the floorplan is successful, we need to check the actual layout which is by using a tool called MAGIC.
+-  Before that, we need to check the die area in microns from the values in floorplan.
+
+![die_area](https://github.com/user-attachments/assets/1245aa50-a62b-46e0-846e-753952e9d6fb)
+
+-  Below are the following steps to how to access the tool from the terminal and actual layouts as well.
+-  First, you need to change the directory to which your generated floorplan exists.
+
+        cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/12-09_12-31/results/floorplan/
+        
+-  After that you need to enter one command which is generate our floorplan using MAGIC tool
+
+        magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.floorplan.def &
+   
+-  The Screenshots of our floorplan
+
+![ol9](https://github.com/user-attachments/assets/bb33d799-62ed-4325-b85b-a969b394b324)
+
+-  After this, you will able to see a layout. To place the layout in the centre of your screen first you need to place your cursor on the layout and 
+
+        press - s to select (Here your entire layout gets highlighted
+        press - v to set the layout to the centre of your screen
+   
+-  If you want to zoom in to a specific portion of the layout, first left-click on your mouse and then adjust the area you want to zoom     in on. Next, right-click on your mouse. Finally, press "z" to zoom in until you see the standard cell diagram.
+
+![zoom_in_layout](https://github.com/user-attachments/assets/29a818e5-b1d7-4f04-84a4-559fff25cbd6)
+![zoom_in_layout_1](https://github.com/user-attachments/assets/206e9128-52a7-470b-abeb-5aed9a1088a0)
+![zoom_in_layout_2](https://github.com/user-attachments/assets/39aab64c-0838-4e85-9f6e-af4858cf3b40)
+
+
+
+
+
+
+
+
+
