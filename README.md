@@ -367,6 +367,67 @@ OpenLANE is an advanced, open-source framework designed for automating the ASIC 
 # SKY130 - Chip Floor planning considerations
 ## L1 - Utilization factor and aspect ratio
 
+-  A detailed comparison of optimal and suboptimal floorplans, focusing on design efficiency and scalability.
+
+![Screenshot (553)](https://github.com/user-attachments/assets/fed5af38-6716-4b1d-a600-17d28337b9bf)
+
+-  In the physical design flow, the initial steps are crucial for defining the core and die dimensions.
+  
+-  Die: The die refers to the actual size of the chip within an integrated circuit (IC), housing transistors and I/O components.
+-  Core: The core is the processing unit of the chip, where all digital logic occurs. It is a section of the die that handles the           execution of tasks and logic operations. Modern processors often have multiple cores (e.g., quad-core, octa-core), enabling              multitasking and increased processing efficiency.
+
+![Screenshot (558)](https://github.com/user-attachments/assets/f99d7653-b59d-4e2d-b465-13b6b92a68ff)
+  
+-  The dimensions of the core (height and width) are determined by the design’s netlist, which dictates the number of components            required to execute the logic. Consequently, the die’s dimensions are directly influenced by the core’s size.
+-  Before going into the dimensions of the core, let us know about Netlist.
+-  What is Netlist? : A netlist represents the connections between all the components within the design, and it plays a fundamental         role in determining the layout and structure of the chip
+-  Let’s consider a netlist that contains two logic gates and two flip-flops, where each element occupies an area of 1 square unit.         In this case, the total number of components in the netlist is 4. So Area occupied by the netlist is 4 square units. Therefore, the      minimum total area required for the core will be:
+
+                                    Core Area = 2 (logic gates) + 2 (flip-flops) = 4 square units
+   
+-  Below screenshots shows step by step explanation of How we are defining the width and height of Core and Die.
+
+![Screenshot (554)](https://github.com/user-attachments/assets/78a811a2-d5d9-47cd-b172-a82452769703)
+
+![Screenshot (555)](https://github.com/user-attachments/assets/bef94ed6-7f7d-4427-885e-83f4f4080c69)
+
+![Screenshot (556)](https://github.com/user-attachments/assets/868fc622-948c-4fe6-95d7-b56a18802415)
+
+![Screenshot (557)](https://github.com/user-attachments/assets/34e57d4d-47d3-426b-bf73-2c1c789ee467)
+
+-  Till now we are done with initializing the values of Width and height and here are the two critical metrics that influence               floorplanning decisions:
+  -  ### Utilization Factor: Defined as the ratio of the area occupied by the netlist to the total core area. A utilization factor of 1           indicates 100% usage, often signaling a poorly optimized floor plan with no room for future expansion.
+   
+                                  Utilization Factor (UF): 𝑈𝐹 = Area occupied by netlist / Total core area
+
+![Screenshot (560)](https://github.com/user-attachments/assets/b9217712-844f-4e5a-ab0f-683c3ebdf7d0)
+![Screenshot (561)](https://github.com/user-attachments/assets/aba4a5e2-2d25-4215-ae58-48df273e5a94)
+
+  - Let us calculate the Utilization factor, which is Utilization factor = (4 square units)/(4 square units) = 1 (100% Utilization)
+
+![Screenshot (563)](https://github.com/user-attachments/assets/f801a55a-382a-433a-b41b-d608ec7592d1)
+
+  -  ### Aspect Ratio (AR): The ratio of core height to core width. An AR of 1 indicates a square-shaped core, while deviations from 1            represent a rectangular shape.
+
+                                  Aspect Ratio (AR): 𝐴𝑅 = Height of the core / Width of the core
+     
+​  -  Let us calculate the Aspect Ratio, which is Aspect Ratio = (2 units)/(2 units) = 1 (Which is square in shape)
+
+![Screenshot (565)](https://github.com/user-attachments/assets/116d15a1-a796-4b98-9ef1-77344590037d)
+![Screenshot (566)](https://github.com/user-attachments/assets/43268db3-b47d-45b6-ba6e-f4ad75805e4c)
+
+-  The below screenshots are the other examples for better understanding.
+
+![Screenshot (567)](https://github.com/user-attachments/assets/c9e6f580-5bcd-43bc-8693-18480ad20e4f)
+![Screenshot (571)](https://github.com/user-attachments/assets/c071dcd2-178d-4ea2-94b5-1f4ba219522b)
+![Screenshot (570)](https://github.com/user-attachments/assets/87e63807-6150-416a-95c9-ddb1f088c7cf)
+![Screenshot (569)](https://github.com/user-attachments/assets/1a507a1a-0d25-4e1d-a60c-dbda2451903b)
+![Screenshot (568)](https://github.com/user-attachments/assets/021c4946-eecd-415a-a071-b723f4e446b7)
+
+-  For the above scenario, the Aspect ratio is, Aspect Ratio = (2 units)/(4 units) = 0.5 (The core is Rectangle in shape)
+
+
+  
 
    
 
