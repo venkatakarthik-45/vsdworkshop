@@ -577,7 +577,7 @@ OpenLANE is an advanced, open-source framework designed for automating the ASIC 
 
         cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/12-09_12-31/results/floorplan/
         
--  After that you need to enter one command which is generate our floorplan using MAGIC tool
+-  After that you need to enter one command which is to generate our floorplan using the MAGIC tool
 
         magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.floorplan.def &
    
@@ -597,13 +597,144 @@ OpenLANE is an advanced, open-source framework designed for automating the ASIC 
 ![zoom_in_layout_2](https://github.com/user-attachments/assets/39aab64c-0838-4e85-9f6e-af4858cf3b40)
 
 
-## L2 Library Binding & Placement
+## L2 - Library Binding & Placement
 
 ## Netlist binding and initial place design
 
 -  In a real-time scenario, if we take a circuit and check the shape of any gate in that circuit, we can easily identify its functionality. In real life, the shape will typically look like a box.
 
+![Screenshot (604)](https://github.com/user-attachments/assets/1bfc7ab6-3bf1-469a-bb76-65be41983fb0)
+
 -  For the circuit example below, we have provided the real-time view of the particular circuit and given physical dimensions (width and height) because that's what we actually deal with in practice.
+
+![Screenshot (605)](https://github.com/user-attachments/assets/e3e12e8c-59ec-4985-bc17-b22082658f73)
+![Screenshot (606)](https://github.com/user-attachments/assets/db66e2ff-37b5-4b60-a66a-6f4394c0764f)
+
+
+- Each element of the netlist now has proper dimensions with height and width. Blocks already have precise dimensions. We will only consider the blocks and remove wires.
+
+![Screenshot (607)](https://github.com/user-attachments/assets/db29efba-4ccb-4419-8dd0-f59361da2cd3)
+
+-  Lets combine all the blocks into one side and call it a Library.
+-  Before proceeding further, first, we need to know about what is library.
+
+### Library
+-  The contains everything like cells, shapes and size of cells, Various flavours of the same cells, Timing information and the delay information.
+-  Here the size is referred to as the drive strengths.
+-  Also it has different functionality and different threshold voltages as shown in the below screenshots.
+
+![Screenshot (608)](https://github.com/user-attachments/assets/b8237a3a-3a8a-4743-bd0c-355e7f9ff993)
+
+-  Once we determine the proper sizes and shapes of each gate, the next step is to place those particular shapes and sizes into a floorplan.
+
+![Screenshot (609)](https://github.com/user-attachments/assets/5229ec0d-cfa6-41e9-b136-79130f583034)
+
+-  We need to take the physical view of the netlist and should place over the floorplan
+
+![Screenshot (610)](https://github.com/user-attachments/assets/85ae01a7-95e6-47ea-bde6-b97ccd71e9a6)
+
+- The FF1 is positioned close to Din1, and FF2 is positioned near Din2, with combinational circuits placed between FF1 and FF2 as per the Netlist diagram.
+
+![Screenshot (611)](https://github.com/user-attachments/assets/db35deff-71f4-47a8-b7b1-70b33dd5e7b7)
+
+-  why we are placing that because to avoid delay and other conditions.
+-  If you look at the below image, you'll see that FF2 is positioned near Dout2. A noteworthy point here is that we have combined the combinational cells. As a result, the delay between FF1 and 1 is minimal.
+
+![Screenshot (612)](https://github.com/user-attachments/assets/1f60b297-7df3-4a1f-9656-8e638ff56796)
+
+- The remaining flops are also placed as shown in the below images,
+
+![Screenshot (613)](https://github.com/user-attachments/assets/ba4c3248-8629-43a1-896c-2cf3125dcacd)
+![Screenshot (614)](https://github.com/user-attachments/assets/90364e2b-3804-493d-bf96-469039557c22)
+
+## Final placement optimization using estimated wire-length and capacitance
+
+-  When we closely examine the images above, we notice a significant distance between some flops and combinational circuits. This could potentially cause delays and become a major issue for us. To address this, we employ a solution known as Optimized Placement.
+
+-  We also utilize the concept of Signal Integrity to ensure the integrity of the signal. To maintain this integrity, we use Repeaters. At this stage, we estimate wire length and capacitance in order to insert repeaters. Repeaters act as buffers that recondition the original signal, create a new signal replicating the original, and then share it further.
+
+-  The process of signal integrity relies on wire length estimation and calculation. We estimate the wire length and calculate capacitance to create a waveform, ensuring that the transition of the waveform is within the permissible range. This process is also referred to as slew analysis.
+  
+-  So based on the above explanation, you can see how we are placing buffers in each stage.
+
+![Screenshot (615)](https://github.com/user-attachments/assets/e2f52470-b1d4-48db-b0e9-65b558378be6)
+![Screenshot (617)](https://github.com/user-attachments/assets/d2ca9872-0f56-4d2a-9c88-9ccd731f450e)
+![Screenshot (619)](https://github.com/user-attachments/assets/0912c57a-e7b9-4352-9e74-71892a557002)
+![Screenshot (620)](https://github.com/user-attachments/assets/7ccc0f2e-cf0e-4d3d-9e22-1973e26030b2)
+![ndfjs](https://github.com/user-attachments/assets/98d72354-e745-47a3-b436-11451f26cd0a)
+
+
+## Need for Libraries and Characteristics
+
+-  Every typical IC Design has a proper flow which is shown below.
+
+### Step-1 Logic Synthesis:
+-  For instance, if we have functionality coded in the form of RTL, the next step is to convert the logical functionality into hardware, a process referred to as logic synthesis.
+-  The output of logic synthesis is nothing but an arrangement of gates that will represent the original functionality that we actually described using RTL.
+
+### Step-2 Floor planning: 
+-  In this step, we import the output of logic synthesis or the Netlist from the logic synthesis and decide on the core and die. The dimensions of the core and die completely depend on the number of gates, their shapes, and the sizes present in the output of the logic synthesis.
+   
+### Step-3 Placement:
+At this stage, we take the specific logic cells from the netlist and position them on the chip to ensure the initial timing requirements are met.
+
+### Step-4 Clock Tree Synthesis (CTS): 
+-  For example, if we want to minimize skew or ensure that the clock is evenly distributed across all logic cells, CTS ensures that the clock signal reaches each clock endpoint and that the buffer cells maintain equal rise and fall times for the clock signal.
+
+### Stage-5 Routing: 
+-  For example, if we want to route between 2 points there are certain properties of the cells that have to be taken care of while routing, and also it depends on the characteristics of the 2 points.
+
+### Stage-6 Static Timing Analysis:
+- This stage involves checking the setup time, hold time, and maximum achievable frequency for the circuit, which is the final stage in the IC Design flow and is also known as Sign-off STA.
+
+-  Below are screenshots of the Typical IC Design Flow
+
+![Screenshot (621)](https://github.com/user-attachments/assets/6826ad20-c012-486b-8bca-3be0e95b9e21)
+![Screenshot (622)](https://github.com/user-attachments/assets/5707ed30-900c-4623-b25e-8357b981d561)
+
+## Congestion-aware placement using RePlAce
+
+-  Placement is a key step in the VLSI design process, where the physical locations of standard cells or logic elements are determined within a chip. This phase is crucial as it sets the foundation for effective routing and overall chip performance. Placement can be divided into two main stages:
+
+  1. Global Placement:
+  -  The main objective is to reduce the wire length. In OpenLANE we use the concept of HPWL (Half-parameter wire length)
+  -  In this initial phase, cells are assigned approximate locations on the chip.
+  -  Some overlap between cells is tolerated at this stage.
+  -  The focus is on achieving a broad layout that adheres to area constraints, providing a rough framework for the design.
+    
+  2. Detailed Placement:
+  -  After global placement, detailed placement fine-tunes the locations of cells.
+  -  It eliminates overlaps and ensures that all cells are placed in valid, predefined locations on the grid.
+  -  A well-executed detailed placement phase is essential for optimizing the routing process and improving the overall efficiency of the design.
+
+-  Finally, the main motto is to decrease the OVFL (Overflow) value. If it decreases it means the placement is going perfect.
+-  To run placement
+
+                                          run_synthesis
+-  Screenshots for reference,
+
+![placement_1](https://github.com/user-attachments/assets/1d3d4fbf-967c-48db-a1ff-f3637495a464)
+![placement_2](https://github.com/user-attachments/assets/ca54d8d7-12c0-4084-865a-14435d880cd2)
+
+-  After we complete the placement, we need to check out the layout. The process is shown below.
+-  First, you need to change the directory to openlane results
+
+             cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/12-09_12-31/results/placement/  
+
+-  After this, you need to run the below command to check the placement using the MAGIC tool
+
+             magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.placement.def &
+
+-  Screenshots for your reference,
+
+![placement_3](https://github.com/user-attachments/assets/a76e59c9-8a5f-4b9d-95da-63103f0aed67)
+![placement_4](https://github.com/user-attachments/assets/80380f75-8525-448a-95cb-ff1a1a06a396)
+
+-  The key point here is that in the flow, the PDN is created after floorplanning. However, in the OpenLANE flow, the order is slightly different. We create the PDN just before the routing, after the post-floorplan and post-CTS stages.
+
+
+## L3 - Cell design and Characterization flows
+
 
 
 
