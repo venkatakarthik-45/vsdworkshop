@@ -735,9 +735,143 @@ At this stage, we take the specific logic cells from the netlist and position th
 
 ## L3 - Cell design and Characterization flows
 
+### Cell Design:
+-  This flow consists of 3 parts
+    1. Inputs
+    2. Design Steps
+    3. Outputs
+-  let us know everything briefly.
+  1. Inputs:
+     -  If you want to design cells, we require few inputs they are,
+       -  PDK's: Process design kits, These kits come from foundries. Those kits consist of
+           -  DRC, LVS Rules
+           -  SPICE Models
+           -  Library and User-define specs.
+
+ ### DRC and LVS Rules:
+-  Design Rule Checking (DRC) ensures that the physical layout of an integrated circuit (IC) adheres to specific manufacturing requirements set by the semiconductor foundry.DRC rules enforce constraints on geometry, such as minimum spacing between components, metal layer width, and via dimensions, to ensure that the chip can be reliably fabricated.
+-  These rules help avoid errors like short circuits, open circuits, or electrical failures that could arise during manufacturing.
+-  The Tech files contain the design rules and process parameters necessary for fabricating the chip. we have few rules like Polywidth, extension over active and poly to active spacing. which is clearly shown in the below image
+-  Layout vs Schematic (LVS) is a verification process that checks whether the physical layout matches the original schematic design.
+-  It compares the netlist generated from the layout to the netlist derived from the circuit's logical design.
+-  Screenshots shown for your reference,
+
+![Screenshot (628)](https://github.com/user-attachments/assets/44dcebfa-df40-4d58-ad0e-a64cd91e338d)
+![Screenshot (629)](https://github.com/user-attachments/assets/b0e28c17-1f67-4cef-949f-c2c0e58b50d2)
+
+### SPICE (Simulation Program with Integrated Circuit Emphasis) Models:
+-  SPICE models are detailed mathematical models used to simulate the electrical behavior of individual components in a circuit (e.g., transistors, diodes, resistors, capacitors).
+-  These models represent the electrical characteristics of components such as voltage, current, capacitance, and resistance under various operating conditions
+-  Screenshots shown for your reference,
+
+![Screenshot (630)](https://github.com/user-attachments/assets/b55e9ed1-e19d-4d8b-b8fb-035433d489d8)
+![Screenshot (631)](https://github.com/user-attachments/assets/64d09785-8fb0-4a26-b5f2-322e83ae1490)
+
+### Library and User-Defined Specifications:
+
+### Standard Cells:
+-  A standard cell library contains a collection of predefined and pre-characterized logic gates, flip-flops, and other digital components used to build ICs.
+-  These libraries come with detailed specifications, such as timing, power consumption, and area, for different operating conditions.
+-  The library also includes information about physical layout, cell dimensions, pin positions, and connectivity, allowing designers to use these cells in their designs without manually designing each component.
+-  These cells are being placed in a section called Library. Where we also keep all the Decap cells, Macro, IPs, etc.
+-  The screenshots provided below contain information about standard cells.
+
+![Screenshot (625)](https://github.com/user-attachments/assets/ae2397f3-d760-4776-a31f-31ac7913010e)
+![Screenshot (626)](https://github.com/user-attachments/assets/bf11f910-ccc4-4d0f-b6e4-3ba0b8f2c0c3)
+![Screenshot (627)](https://github.com/user-attachments/assets/5f129817-3b1b-4979-89bb-98a8a787532e)
+
+### User-defined Specification:
+-  User-defined specs are constraints or requirements set by the design team for specific components or subsystems that go beyond what is provided in the standard library.
+-  Let us consider a few examples, Cell Height is defined as the separation between the power rail and the ground rail, it is the responsibility of the library developer to maintain.
+-  cell width can influence timing in VLSI design. The width of a standard cell, which determines the number of transistors and their arrangement in a cell, directly affects factors like drive strength, capacitance, and delay, all of which contribute to the overall timing of the circuit. It is also the responsibility of the library developer to maintain the drive strength as per the requirement.
+-  The lower the drive strength of a cell, the harder it is for the cell to drive its connected load.
+-  Few more example shown in below screenshots for your reference
+
+![Screenshot (634)](https://github.com/user-attachments/assets/93f3784f-f7c6-4477-96b1-27bccd0c09d7)
+![Screenshot (633)](https://github.com/user-attachments/assets/2e79107e-e2a8-4a7c-9d27-99e7dfaff88e)
+![Screenshot (636)](https://github.com/user-attachments/assets/b4a2cbe9-4f48-4aef-bb03-7c9819120dde)
+![Screenshot (635)](https://github.com/user-attachments/assets/b7d0945d-5d6d-4ea5-996e-6b00ecc5e2fe)
+
+## Design steps
+
+-  In this stage, we have 3 steps
+    1. Circuit Design
+    2. Layout Design
+    3. Characterization
+
+1. Circuit design:
+  -  Develop the logical representation of your circuit using schematic design tools.
+  -  Define the functionality and interconnections of standard cells to achieve the desired logic.
+  -  Specify the functionality of each cell and its connections within the circuit.
+  -  Ensure that all logical operations and connections are accurately represented in the schematic.
+  -  Once you know about the values of PMOS and NMOS, the Next step is to implement those values in Layout design.
+  -  After everything, the typical output that we get after circuit design is "Circuit description language(CDL)" `.CDL FILE`
+
+![Screenshot (637)](https://github.com/user-attachments/assets/48199567-9a27-46c8-bc4b-1e9b0a405793)
+![Screenshot (638)](https://github.com/user-attachments/assets/da618fb0-d49b-46db-90e3-814274d02581)
+![Screenshot (639)](https://github.com/user-attachments/assets/3ee62a49-b336-4780-ae3a-4ca54f22e871)
+
+2. Layout Design:
+  -  Utilize layout design tools MAGIC to translate the logical schematic into a physical layout.
+  -  Design the placement of standard cells and the routing of interconnects.
+  -  Here we have 2 steps, step 1, is to get the function implementation through an MOS Transistor (Set of PMOS and NMOS)
+  -  Step 2 is to get the PMOS and NMOS network graph out of the design that we have implemented.
+  -  The Output of layout design is a GDSII (Graphic Data System II) File which is  used to describe the physical layout of an integrated circuit, a LEF (Library Exchange Format) File which describes the physical and electrical properties of standard cells and other components used in the design and Extracted SPICE Netlist, A detailed description of resistance, capacitance of the each and every element of the circuit of the layout. `.cir file` 
+
+![Screenshot (640)](https://github.com/user-attachments/assets/1d1d24c7-62cf-4fe1-afda-dfb59f52543c)
+![Screenshot (641)](https://github.com/user-attachments/assets/8eda8fea-cf5a-4e94-a1ab-2d892ab6fa14)
+![Screenshot (642)](https://github.com/user-attachments/assets/38f05d55-cbf8-41b0-8a97-f479d1b2bc1a)
+![Screenshot (643)](https://github.com/user-attachments/assets/d208ab2b-d243-4d64-a2a9-cb9274d3bafd)
+
+3. Characterization:
+  -  Analyze the circuit for timing performance, power consumption, and noise levels.
+  -  Use tools like GUNA for comprehensive characterization to ensure the design meets performance and power specifications.
+
+![Screenshot (649)](https://github.com/user-attachments/assets/b9731c7b-2b89-4d84-b87a-c0b10b92168d)
+![Screenshot (650)](https://github.com/user-attachments/assets/2cacf374-0540-4e0f-bbe6-4dc9c0c41ff0)
+![Screenshot (651)](https://github.com/user-attachments/assets/86d8577f-eb32-45ff-be63-d7d2c58f2d33)
+
+
+## L4 - General timing characterization parameters
+
+-  Timing threshold definitions are crucial for understanding the behavior of waveforms in circuit design.
+-  Key parameters include:
+  -  Slew Thresholds (e.g., Slew_low_rise-thr): Represents the point at which the signal transition is considered complete. Typically, this is set at about 20% or 30% of the signal swing.
+  -  Delay Thresholds (e.g., in_rise_thr): Defines the points for measuring rise and fall times in the waveform. These thresholds are usually around 50% of the signal swing, indicating when the signal has transitioned through half of its final value.
+
+![Screenshot (652)](https://github.com/user-attachments/assets/2ce086de-765b-4715-9faa-f6130369c721)
+![Screenshot (653)](https://github.com/user-attachments/assets/9fd77274-5efa-406e-8f10-8aa437c8aa42)
+![Screenshot (654)](https://github.com/user-attachments/assets/3681b2d5-3e0c-4567-b450-e8b1dbb10300)
+
+### Propagation Delay and Transition Time
+
+1. Propagation Delay:
+-  It Measures the time difference between when the input reaches a threshold (e.g., 50%) and when the output reaches the same threshold.
+
+                        Propagation Delay = Time (out_rise_thr) − Time (in_rise_thr)
+
+-  Negative delays indicate poor threshold point choices or issues with the waveform. Correct threshold selection is crucial to avoid inaccuracies
+
+![Screenshot (655)](https://github.com/user-attachments/assets/e23b15ff-5683-48ca-a243-79632499bb2b)
+![Screenshot (656)](https://github.com/user-attachments/assets/6bbf9b64-e5d6-4af0-a9d1-f7e3c9cfe643)
+![Screenshot (657)](https://github.com/user-attachments/assets/d98909ec-219c-456a-9257-f94889f1fa57)
+![Screenshot (658)](https://github.com/user-attachments/assets/a20c2af2-09f1-45bd-b216-6b1b4e811ccc)
+![Screenshot (659)](https://github.com/user-attachments/assets/5a3afc55-e668-407d-8f2b-d31ddbb919b3)
+
+2. Transition Time:
+-  It  Measures the time taken for the signal to transition between two points on the waveform, often defined by high and low thresholds.
+
+  Transition Time = 
+    -  for rise waveform, Time(slew_high_rise) − Time(slew_low_rise)
+    -  for fall waveform, Time(slew_high_fall) − Time(slew_low_fall)
+  
+![Screenshot (660)](https://github.com/user-attachments/assets/d16a7b97-4370-4e4a-a4dc-546cd9531d88)
+![Screenshot (661)](https://github.com/user-attachments/assets/92d1bd07-59d8-41d0-81fb-7ec81fb09a69)
+
+
+# Day 3 - Design library cell using Magic Layout and NGSPICE characterization
+## L1 - Labs for CMOS inverter ngspice simulations
 
 
 
-
-
-
+  
