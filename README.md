@@ -419,10 +419,11 @@ OpenLANE is an advanced, open-source framework designed for automating the ASIC 
 -  The below screenshots are the other examples for better understanding.
 
 ![Screenshot (567)](https://github.com/user-attachments/assets/c9e6f580-5bcd-43bc-8693-18480ad20e4f)
-![Screenshot (571)](https://github.com/user-attachments/assets/c071dcd2-178d-4ea2-94b5-1f4ba219522b)
-![Screenshot (570)](https://github.com/user-attachments/assets/87e63807-6150-416a-95c9-ddb1f088c7cf)
-![Screenshot (569)](https://github.com/user-attachments/assets/1a507a1a-0d25-4e1d-a60c-dbda2451903b)
 ![Screenshot (568)](https://github.com/user-attachments/assets/021c4946-eecd-415a-a071-b723f4e446b7)
+![Screenshot (569)](https://github.com/user-attachments/assets/1a507a1a-0d25-4e1d-a60c-dbda2451903b)
+![Screenshot (570)](https://github.com/user-attachments/assets/87e63807-6150-416a-95c9-ddb1f088c7cf)
+![Screenshot (571)](https://github.com/user-attachments/assets/c071dcd2-178d-4ea2-94b5-1f4ba219522b)
+
 
 -  For the above scenario, the Aspect ratio is, Aspect Ratio = (2 units)/(4 units) = 0.5 (The core is Rectangle in shape)
 
