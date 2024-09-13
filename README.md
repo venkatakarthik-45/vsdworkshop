@@ -869,7 +869,8 @@ At this stage, we take the specific logic cells from the netlist and position th
 ![Screenshot (661)](https://github.com/user-attachments/assets/92d1bd07-59d8-41d0-81fb-7ec81fb09a69)
 
 
-# Day 3 - Design library cell using Magic Layout and NGSPICE characterization
+# Day 3 
+# SKY130 - Design library cell using Magic Layout and NGSPICE characterization
 ## L1 - Labs for CMOS inverter ngspice simulations
 
 
