@@ -597,7 +597,13 @@ OpenLANE is an advanced, open-source framework designed for automating the ASIC 
 ![zoom_in_layout_2](https://github.com/user-attachments/assets/39aab64c-0838-4e85-9f6e-af4858cf3b40)
 
 
+## L2 Library Binding & Placement
 
+## Netlist binding and initial place design
+
+-  In a real-time scenario, if we take a circuit and check the shape of any gate in that circuit, we can easily identify its functionality. In real life, the shape will typically look like a box.
+
+-  For the circuit example below, we have provided the real-time view of the particular circuit and given physical dimensions (width and height) because that's what we actually deal with in practice.
 
 
 
