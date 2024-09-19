@@ -872,7 +872,175 @@ At this stage, we take the specific logic cells from the netlist and position th
 # Day 3 
 # SKY130 - Design library cell using Magic Layout and NGSPICE characterization
 ## L1 - Labs for CMOS inverter ngspice simulations
+### IO placer revision
+-  IO placer is one of the open-source EDA tools used to place the Input and Output around the core.
+-  Below one is the pre IO Placer Image
+
+![ol10](https://github.com/user-attachments/assets/22673f48-bb3b-49f2-adf6-4edf78c3c358)
+
+-  Now, first, we need to check the switches in the configuration. Then, we have to find the syntax "env(FP_IO_MODE) 1" and change it to "env(FP_IO_MODE) 2". After that, we need to run the floor planning again.
+-  Below are the images,
+
+![Set_fp_to 2](https://github.com/user-attachments/assets/09eaedf0-5e0b-4857-811d-e2f03d40082e)
+![Set_fp_to_2](https://github.com/user-attachments/assets/752b6643-1986-41a8-b4c7-882ef750d78e)
+
+-  After changing it, finally, we need to check our Placement post IOPlacer step. below is the image for that
+
+![IO Final](https://github.com/user-attachments/assets/16dd77f5-ed71-4822-987f-3656c608e616)
+
+## SPICE DECK creation for CMOS
+
+-  For SPICE deck creation for a CMOS inverter, you're essentially generating a netlist that outlines the connectivity of the circuit. It includes details of the components (like MOSFETs) and their connections.
+
+-  The Voltage Transfer Characteristic (VTC) SPICE simulation involves running this netlist through a simulator, providing input signals, and capturing the output response. This helps in analyzing the behavior of the inverter, specifically how input voltages map to output voltages, giving insight into its switching characteristics.
+
+-  This process comprises of 4 steps,
+### step-1 Component connectivity :
+-  First we need to create spice deck. It is nothing but the connectivity info about Netlist. It has everythng like Input that should provide to the simulation and TAC points which will take the output.
+-  M1 -> PMOS , M2 -> NMOS . We need to define the connectivity of the substrate terminal. The substrate terminal is a potential component or pins on your NMOS and PMOS.
+-  The source of PMOS is connected to Vdd, NMOS is connected to Vss and we also have an output load capacitor.
+
+![Screenshot (662)](https://github.com/user-attachments/assets/98fe21ea-0714-4d04-b831-8109c90bed34)
+
+### Step-2 Component Values:
+-  In this step, we mainly focus on the values for PMOS and NMOS.
+-  The PMOS is given the values of width/Length as 0.375u/0.25u. It says our channel length is 250nm or 0.25u(micron) and the channel width is 375nm or 0.375u.
+-  The same values we are assuming for M2 which is our NMOS.
+-  There is a scenario where the PMOS should be wider than the NMOS.
+-  Ideally, our PMOS should be twice or thrice bigger than our NMOS.
+-  We assume the output load is 10fF(Femto-Farads). This output comes after lots of calculations like output capacitance and etc.
+-  The Input gate voltage we assume it as 2.5v and we assume the drain voltage or main supply voltage as 2.5v
+
+![Screenshot (663)](https://github.com/user-attachments/assets/59d20e1a-087e-4233-adb8-2aae3f4908a0)
+![Screenshot (664)](https://github.com/user-attachments/assets/25fa62fb-53f2-4120-a561-be41183b9e1b)
+![Screenshot (665)](https://github.com/user-attachments/assets/f4da63d9-e353-4808-982e-3442e36c77f5)
 
 
+### Step-3 Identify nodes"
+-  Nodes here mean the points between two components.
+-  The node names here as per the circuit are, In, Vdd, Out, and Vss or 0.
+-  If you want to define load capacitor, we will say that load capacitor lies between "Out" & "0". Same for Vdd as well.
 
+![Screenshot (666)](https://github.com/user-attachments/assets/c008aa5c-874f-480b-9789-18cd367a35ce)
+![Screenshot (667)](https://github.com/user-attachments/assets/2af0c38e-6dc5-40ec-9a49-70295bdc2285)
+
+
+### Step-4 Let's write SPICE Deck:
+-  The below image is a SPICE Deck which is written as per the circuit.
+
+![Screenshot (672)](https://github.com/user-attachments/assets/de3c4281-6e4a-49d7-9ea7-958858ad6304)
+
+-  So now, let's get some idea about each line of SPICE Deck
+-  The first line which is
+
+                              M1 out in vdd vdd pmos W=0.375u L=0.25u
+
+![Screenshot (668)](https://github.com/user-attachments/assets/9f27e098-2eae-489f-b9dc-a47cdbec1328)
+   
+-  This line completely describes the PMOS transistor. which is defined by the name "M1".
+-  There is a trick which is to understand which is drain, which is source and gate in the given syntax.
+-  Trick, After M1, consider the four terms in the form of "D G S S" (Drain, Gate, Source and Substrate). The connectivity explanation in the syntax is written in the form of a given definition which is "D G S S". 
+-  "M1 out in vdd vdd" describes, for M1 MOSFET, the drain is connected to the "Out" node. The Gate is connected to the "In" Node. The substrate is connected to the "Vdd" Node and The source is connected to the "Vdd" Node. PMOS which us M1 is of type PMOS.
+
+                              M2 out in 0 0 nmos W=0.75u L=0.25u
+
+![Screenshot (669)](https://github.com/user-attachments/assets/2aac8071-e6be-49d6-a102-bc1f99969398)
+   
+-  Same for the above line as well, for M2 MOSFET, the drain is connected to the "Out" node. The gate is connected to the "In" Node and the source is connected to the "0" Node The substrate is connected to the "0" Node.
+-  Let's describe the connectivity information for other components and also for our circuit.
+
+                              cload out 0 10f
+                              Vdd vdd 0 2.5
+                              Vin in 0 2.5
+
+![Screenshot (670)](https://github.com/user-attachments/assets/48d797a9-8b85-4325-8903-69c6cfa05656)
+   
+-  The above line describes about load capacitor, which is connected between "Out" Node and "" Node. Its value is of 10fF. Same for Vdd and Vin.
+-  Let's see about Simulation commands
+
+                              .op
+                              .dc Vin 0 2.5 0.05
+
+![Screenshot (671)](https://github.com/user-attachments/assets/efd0a5e2-84f3-41fb-b4ef-45270a38a7b3)
+
+   
+-  These 2 lines describe, we will be sweeping the gate voltage (Input voltage) of the NMMOS from 0 to 2.5 at steps of 0.05. The reason here is we need to calculate the voltage at Output (out) while we sweep the input voltage because of the Voltage Transfer Characteristics (VTS) - Output voltage vs Input Voltage.
+
+  ### Step-5 Describing Model File:
+  -  This is where we get the complete description of PMOS and NMOS trasistors and All parameters which is related to 250nm technology node and all will be described in the model file which is in ` .mod file` extension.
+
+                                .LIB "tsmc 0.25um_model.mod" CMOS MODELS
+                                .end
+![Screenshot (672)](https://github.com/user-attachments/assets/1528bc1a-502e-471e-b6b5-d949a56b9b3d)
+
+
+## SPICE SIMULATION
+-  Now we will be doing the SPICE SIMULATIONS for the below-provided specifications.
+
+![Screenshot (674)](https://github.com/user-attachments/assets/000ca040-3926-471f-9586-4c8720dbd9b7)
   
+-  Steps to run : path -> Source of ckt file (.cir) -> To Execute that ,the command is run -> Next "Setplot" -> dc1 -> display -> plot out vs in.
+-  Below are the screenshots for your reference.
+
+![Screenshot (675)](https://github.com/user-attachments/assets/aa4aacbc-7460-45b9-bf38-9599f2f2c456)
+![Screenshot (676)](https://github.com/user-attachments/assets/9b8fcb0f-004d-4c95-8496-b03c07ee9169)
+![Screenshot (677)](https://github.com/user-attachments/assets/1fccc10a-4235-4288-961e-a92b8ba05b1a)
+![Screenshot (678)](https://github.com/user-attachments/assets/93465797-8172-4e12-979a-9a41cf3432cd)
+![Screenshot (679)](https://github.com/user-attachments/assets/34deddc6-432b-47f4-993b-4dbcb2c7dbc2)
+![Screenshot (680)](https://github.com/user-attachments/assets/d08d9006-cc44-4259-8848-53e9d0518602)
+![Screenshot (681)](https://github.com/user-attachments/assets/e0a8729f-81f5-46a0-a6c9-3f3fb042818c)
+![Screenshot (682)](https://github.com/user-attachments/assets/1a93d876-e116-4142-8892-f7344a65fe74)
+![Screenshot (683)](https://github.com/user-attachments/assets/70a893fc-3b7f-4eae-a442-8af3d3becf1f)
+![Screenshot (684)](https://github.com/user-attachments/assets/b05f9362-3e3f-4169-bb51-f5a8de73b399)
+![Screenshot (685)](https://github.com/user-attachments/assets/b9d8af67-d229-4a08-9518-f741dabe2894)
+
+-  lets analyze the waveforms of the above-implemented simulation.
+
+![Screenshot (686)](https://github.com/user-attachments/assets/a9262cca-c806-4096-abf5-396ecc4bc57b)
+![Screenshot (687)](https://github.com/user-attachments/assets/c39c8cdd-fea0-4df7-897b-7d69ff44e542)
+
+-  Now let's change the values of Wp which is the width of the PMOS which is shifted 2.5 times of our NMOS channel width (0.375 * 2.5 = 0.9375)
+
+![Screenshot (690)](https://github.com/user-attachments/assets/202ef39b-696b-4aef-ab5c-5e270465376f)
+
+-  We have increased the width of the PMOS Transistor.
+-  Lets analyze the waveforms.
+
+![Screenshot (691)](https://github.com/user-attachments/assets/5f58d15c-227f-4256-8305-122979f1b491)
+
+-  Now let's compare the two waveform specifications which we implemented.
+
+![Screenshot (692)](https://github.com/user-attachments/assets/76637351-c3e3-4a75-ab7f-aa6deed5cfdb)
+
+Here is the first characteristic that we got after analyzing is 
+
+### The switching threshold (Vm): 
+-  In a CMOS inverter is the input voltage at which the output voltage equals the input voltage, meaning 𝑉𝑖𝑛=𝑉𝑜𝑢𝑡. This parameter is key to defining the robustness of the inverter circuit. Regardless of the NMOS or PMOS sizes, the behavior remains consistent: when 
+𝑉𝑖𝑛 is low, 𝑉𝑜𝑢𝑡​ is high, and vice versa. This characteristic, maintained across different transistor sizes, contributes to the reliability and widespread use of CMOS logic in gate designs.
+-  Switching Threshold means the point at which the device switches. As per the waveforms, Irrespective of voltage levels both the shapes are the same. As shown below,
+
+![Screenshot (693)](https://github.com/user-attachments/assets/be480c44-6e86-458f-be0f-eba4c243880d)
+![Screenshot (694)](https://github.com/user-attachments/assets/69e4d21f-7572-4e6a-b91f-04c36bf05c80)
+
+ 
+### Static Characteristics :
+-  Static characteristics of a CMOS inverter refer to the steady-state behavior of the circuit, which describes how the output voltage changes in response to different input voltages. These characteristics are captured in the Voltage Transfer Characteristic (VTC) curve.
+-  Vm is the point where Vin = Vout, Vgs = Vds and Idsp = - Idsn.
+
+
+![Screenshot (695)](https://github.com/user-attachments/assets/8fcafefc-f7cd-4498-bdf5-107c1644e9fe)
+![Screenshot (696)](https://github.com/user-attachments/assets/a2746e6e-1407-4fc0-9ad5-3602cd0d3361)
+![image](https://github.com/user-attachments/assets/fd0d572a-bdb8-4ffb-bfa7-0e35601307a8)
+
+
+### Static and Dynamic Simulations of CMOS Inverter
+-  Now let's do the dynamic simulations, where we identify what is the value of rise and fall delay and how it varies by varying switching thresholds.
+-  Let's introduce one more spice deck with Transient analysis as an Add on. Everything else remains smae and also the input we provide will be a pulse and the Simulation command will be transient analysis
+
+                                        .tram 10p 4n 
+
+![Screenshot (698)](https://github.com/user-attachments/assets/94369aef-777c-4519-8174-1a9bb5e7e34d)
+
+
+
+
