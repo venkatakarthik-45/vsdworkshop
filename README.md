@@ -1082,6 +1082,130 @@ Here is the first characteristic that we got after analyzing is
 ![Screenshot (722)](https://github.com/user-attachments/assets/bf4f537f-b46b-4c03-a537-f30fb1bc2a4c)
 
 
-## Lab Steps to Git-Clone
+## LAB STEPS TO GIT-CLONE
 
+The following images and information show the git clone options,
+
+          cd Desktop/work/tools/openlane_working_dir/openlane
+
+          git clone https://github.com/nickson-jose/vsdstdcelldesign
+   
+          cd vsdstdcelldesign
+    
+          cp /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech
+
+          magic -T sky130A.tech sky130_inv.mag &
+
+![gitclone](https://github.com/user-attachments/assets/32642e94-c085-4f3f-8315-dd2a49892f5e)
+![gitclone_2](https://github.com/user-attachments/assets/072b894f-86e5-45a7-b374-4f40990945b1)
+![copying_sky130A](https://github.com/user-attachments/assets/445ba7ef-53d0-4f1a-9ccc-eb3a44537eb8)
+![Aftercopying_sky130A](https://github.com/user-attachments/assets/5d50db21-bd2f-41e1-b370-c655d8f103ea)
+
+## ThEORY - INCEPTION OF LAYOUT & CMOS FABRICATIONS
+
+-  The process of CMOS fabrication involves various stages, including substrate selection, isolation, well formation, gate terminal creation, and interconnect formation.
+
+### 1. Substrate Selection:
+-  Starting Material: The process begins with a p-type silicon wafer, usually oriented along the (100) crystallographic plane, which has a resistivity of 5-50 ohms to allow high-performance transistors.
+-  Importance: The substrate acts as the foundation for all subsequent fabrication steps. A well-doped substrate helps control parasitic capacitances and ensures optimal electrical properties.
+
+ ![Screenshot (725)](https://github.com/user-attachments/assets/2aabe35c-1f2a-418a-a47d-991a37e0b207)  
+
+### 2. Active Region Formation:
+-  Defining the Regions: The p-type silicon substrate is etched to create isolated pockets, where individual NMOS and PMOS transistors will be formed.
+-  Isolation Process:
+  -  A thin layer (~40 nm) of silicon dioxide (SiO₂) is deposited for electrical isolation.
+  -  Over the SiO₂, a thicker (~80 nm) silicon nitride (Si₃N₄) layer is deposited, which will serve as a hard mask during subsequent etching steps.
+-  Photolithography and Etching:
+  -  A photoresist layer (~1 µm) is deposited over the Si₃N₄ layer, and Mask 1 is applied using UV light to expose unwanted regions.
+  -  The exposed Si₃N₄ is etched away, exposing the SiO₂ underneath.
+  -  The photoresist is then removed, and the wafer undergoes a Local Oxidation of Silicon (LOCOS) process to grow thick SiO₂ in the exposed areas, creating an insulating layer. This prevents interference between transistors (known as bird’s beak formation during oxide growth).
+  -    Final Cleaning: Si₃N₄ is removed using hot phosphoric acid to complete the isolation of transistor regions.
+
+![Screenshot (726)](https://github.com/user-attachments/assets/7b176bcc-16d1-44bf-a081-a46cc9a02864)
+![Screenshot (727)](https://github.com/user-attachments/assets/8a5ac75a-f5cd-4a98-9593-8acb7f7cf98a)
+![Screenshot (728)](https://github.com/user-attachments/assets/bff6bd4a-4411-4112-8927-16c5e56ae26e)
+![Screenshot (729)](https://github.com/user-attachments/assets/32fb8cba-b181-4078-a3fe-20d6e2514c15)
+![Screenshot (730)](https://github.com/user-attachments/assets/ce02c1ee-0ef5-4205-8885-560f5fae6430)
+![Screenshot (731)](https://github.com/user-attachments/assets/f7529b24-b23c-4fdf-9286-f1e66b1f5cd7)
+![Screenshot (732)](https://github.com/user-attachments/assets/b835fa9b-fd64-4d2c-afe4-e6e9c8a70c84)
+![Screenshot (733)](https://github.com/user-attachments/assets/babcf489-6b04-4234-847a-90a7bd6cdba2)
+
+
+### 3. N-Well and P-Well Formation:
+-  Well Definition: The NMOS transistors require a P-well, and the PMOS transistors need an N-well. These wells are not formed simultaneously.
+-  Photolithography (Mask 2 & Mask 3):
+First, the P-well region is protected with photoresist, and Mask 2 is used for patterning. Boron ions (~200 keV) are implanted into the exposed area, creating a P-type region. Similarly, Mask 3 is applied to form the N-well using Phosphorus ions.
+-  Drive-In Diffusion: After implantation, the wafer is placed in a high-temperature furnace to diffuse the dopants deeper into the substrate, forming the final well structures.
+
+![Screenshot (735)](https://github.com/user-attachments/assets/cc40d361-3a5a-45af-88de-850082583a37)
+![Screenshot (736)](https://github.com/user-attachments/assets/7e5ef27e-c5cd-40fe-b818-dc966d5dda96)
+![Screenshot (737)](https://github.com/user-attachments/assets/ac6a3177-5550-46c0-abbb-2f0f970d32b9)
+![Screenshot (738)](https://github.com/user-attachments/assets/64add539-2502-47fc-8268-1d55aeede095)
+![Screenshot (739)](https://github.com/user-attachments/assets/691651b6-3ca4-4c6e-a32b-695add94feca)
+![Screenshot (740)](https://github.com/user-attachments/assets/0593c23d-b07a-4128-997f-81e82d855755)
+![Screenshot (741)](https://github.com/user-attachments/assets/4c3ee6ae-b0d9-45fb-9785-0c56f0d41ab1)
+![Screenshot (742)](https://github.com/user-attachments/assets/98be5a03-e64f-4399-b572-709e453f8d37)
+![Screenshot (743)](https://github.com/user-attachments/assets/e5d95097-edab-492f-a37b-58b0b283c353)
+![Screenshot (744)](https://github.com/user-attachments/assets/8bc8e2ab-babf-4807-af1e-f97064f5f847)
+![Screenshot (745)](https://github.com/user-attachments/assets/53ea2107-0d4b-4264-a970-d1e1c10904bd)
+![Screenshot (746)](https://github.com/user-attachments/assets/73f8ccc5-91fe-4c66-8f3f-8c5ed9616b5f)
+![Screenshot (747)](https://github.com/user-attachments/assets/6fe7f6f3-e569-4dad-9e9a-f00b3535f3bb)
+
+ 
+### 4. Gate Formation:
+-  Gate Oxide: The gate is a crucial terminal controlling the transistor's switching behavior. To start, the damaged oxide layer from previous steps is removed using hydrofluoric acid (HF).
+-  New Oxide Growth: High-quality oxide (~10-20 nm) is regrown to provide a gate dielectric layer that controls the transistor's threshold voltage.
+-  Polysilicon Deposition: A polysilicon layer (doped to reduce resistance) is deposited over the oxide. The polysilicon serves as the gate terminal in both NMOS and PMOS transistors.
+-  Etching: Mask 6 is used to etch away the unnecessary polysilicon, defining the gate regions.
+
+
+![Screenshot (748)](https://github.com/user-attachments/assets/fb14d665-b29e-47f2-83cb-9a6b1b4709fa)
+![Screenshot (749)](https://github.com/user-attachments/assets/79928416-b1b1-43a7-a4dd-8310ab786bbb)
+![Screenshot (750)](https://github.com/user-attachments/assets/9ff40abb-8b06-47a6-885d-adac97ab7438)
+![Screenshot (751)](https://github.com/user-attachments/assets/880ffb6f-57c4-47b6-992a-0951e79db748)
+![Screenshot (752)](https://github.com/user-attachments/assets/d13ea3b4-9eeb-450d-a0c3-6fd295d1b098)
+![Screenshot (753)](https://github.com/user-attachments/assets/d7c14f20-e172-4c85-8c9b-b7ca624490d6)
+![Screenshot (754)](https://github.com/user-attachments/assets/fbe5e787-c011-4a96-b3cf-f2c2e0d99207)
+![Screenshot (755)](https://github.com/user-attachments/assets/7e69f95f-2158-434a-a9f2-a8a9de13ae98)
+![Screenshot (756)](https://github.com/user-attachments/assets/0d7a1620-245f-46c1-a61a-60e18252ae47)
+![Screenshot (757)](https://github.com/user-attachments/assets/b8e05a91-3033-4a12-95f6-8c1962381a80)
+![Screenshot (758)](https://github.com/user-attachments/assets/3c248b1c-64d2-46f5-8c78-88c29c8c6fa3)
+![Screenshot (759)](https://github.com/user-attachments/assets/c6ecda21-80e8-4370-9593-43a69e5eb0df)
+
+
+### 5. Lightly Doped Drain (LDD) Formation:
+-  Mitigating Short-Channel Effects: The LDD structure helps minimize hot electron effects and short-channel issues by using gradual doping.
+-  Process:
+  -  For NMOS, phosphorus ions are implanted using Mask 7 to create lightly doped N regions (N-).
+  -  For PMOS, boron ions are implanted using Mask 8, forming lightly doped P regions (P-).
+-  Spacer Formation: Thick layers of SiO₂ or Si₃N₄ are deposited, and anisotropic etching is performed to create spacers on the sides of the gate. These spacers protect the light doping regions during subsequent high-energy doping.
+
+![Screenshot (760)](https://github.com/user-attachments/assets/21883e2f-1fc2-477b-9ac9-b22b792f5eaf)
+
+
+### 6. Source/Drain Formation:
+-  Screen Oxide Layer: A thin screen oxide layer is deposited to prevent channeling during ion implantation.
+-  Ion Implantation:
+  -  In the P-well (NMOS region), arsenic ions are implanted (~75 keV) using Mask 9 to create heavily doped N+ regions, which will form the source and drain.
+  -  In the N-well (PMOS region), boron ions (~50 keV) are implanted using Mask 10 to form the P+ source and drain regions.
+Annealing: A high-temperature annealing step (~1000°C) activates the dopants and repairs any crystal damage from implantation.
+
+
+### 7. Local Interconnect Formation:
+-  Etching and Metal Deposition: The thin screen oxide layer is removed, and a layer of titanium (Ti) is sputtered over the wafer. Ti has low resistivity and excellent adhesion properties.
+-  Reaction and Silicide Formation:
+  -  The wafer is heated to around 650-700°C in a nitrogen (N₂) atmosphere for a short time (~60 seconds). Titanium reacts with the silicon in the source, gate, and drain regions, forming titanium silicide (TiSi₂).
+  -  Another reaction between Ti and nitrogen forms titanium nitride (TiN), which serves as a barrier and contact material for local interconnects.
+-  Etching TiN: Using Mask 11 and photolithography, TiN is etched away from undesired areas.
+
+
+### 8. Higher-Level Metal Formation:
+-  Surface Planarization: A thick SiO₂ layer with impurities is deposited over the wafer to create a planar surface, crucial for reliable metal interconnect formation. The surface is then polished using Chemical Mechanical Polishing (CMP) to ensure smoothness. Higher metal layers facilitate complex routing between multiple components on the chip.
+-  Metal Thickness: The thickness of metal layers must be carefully controlled to ensure adequate conductivity and to prevent issues such as electromigration.
+-  Design Rules: Design rules for spacing, width, and alignment of metal lines must be strictly followed to prevent short circuits, signal degradation, and manufacturing defects.
+-  Interconnect Performance: The design of higher-level metal layers impacts the performance of the chip, including signal speed and power consumption.
+
+
+After all the fabrication steps which our chip gets involved , the final look is shown below,
 
