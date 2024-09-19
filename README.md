@@ -1035,12 +1035,53 @@ Here is the first characteristic that we got after analyzing is
 
 ### Static and Dynamic Simulations of CMOS Inverter
 -  Now let's do the dynamic simulations, where we identify what is the value of rise and fall delay and how it varies by varying switching thresholds.
--  Let's introduce one more spice deck with Transient analysis as an Add on. Everything else remains smae and also the input we provide will be a pulse and the Simulation command will be transient analysis
+-  Let's introduce one more spice deck with Transient analysis as an add-on. Everything else remains same and also the input we provide will be a pulse and the Simulation command will be transient analysis
 
                                         .tram 10p 4n 
 
 ![Screenshot (698)](https://github.com/user-attachments/assets/94369aef-777c-4519-8174-1a9bb5e7e34d)
 
+-  Here the pulse we provide is
 
+                              Vin in 0 0 pulse 0 2.5 0 10p 10p 1n 2n
+
+
+-  The pulse Starting from 0v and ends at 2.5v. The shift is 0 and it says that the pulse is starting at exactly time unit 0. If it is 50ps, then the pulse would have started after 50ps.
+-  In the above syntax the 1n and 2n are defined as the pulse width because it is 50% duty cycle and the Complete cycle is 2n.
+-  The Rise time and fall time are 10ps and 10 ps. Now this particular pulse is fed as in input to our CMOS and does transient analysis.
+-  The same steps that we need to follow for this as we implemented earlier. The only difference here we see is an extra command which is "setplot" . It defines the transient analysis.
+-  Below are the screenshots of particular implementations.
+
+![Screenshot (698)](https://github.com/user-attachments/assets/8ff37684-d06c-49b5-8328-6b094870dd33)
+![Screenshot (699)](https://github.com/user-attachments/assets/beab81e8-d081-434d-a46f-4e21a37da835)
+![Screenshot (700)](https://github.com/user-attachments/assets/c032278b-4e44-4a4d-b1ed-1f63cada2f31)
+![Screenshot (701)](https://github.com/user-attachments/assets/60c0df07-f401-4537-841b-a8eeba13d163)
+![Screenshot (702)](https://github.com/user-attachments/assets/5cb8f855-d19d-4598-8bce-5ccf1e213daa)
+![Screenshot (703)](https://github.com/user-attachments/assets/2f8b510a-820f-428a-9627-1ba53011c188)
+![Screenshot (704)](https://github.com/user-attachments/assets/1b07893a-adfe-47d8-bb43-49c1f7f6a9fc)
+![Screenshot (705)](https://github.com/user-attachments/assets/72840f36-9df7-45a9-9558-d54922d182a3)
+![Screenshot (706)](https://github.com/user-attachments/assets/6f497ea9-4625-4cd2-adac-4cd5dc00240a)
+![Screenshot (707)](https://github.com/user-attachments/assets/2acf75d8-925f-4289-87fd-679ca212c73a)
+![Screenshot (708)](https://github.com/user-attachments/assets/0271ca4c-767b-4880-8619-6b1e395e736a)
+
+-  Finally, we get the waveforms of Time vs voltage and by that we can calculate the rise and fall delay.
+
+![Screenshot (709)](https://github.com/user-attachments/assets/fcc741c7-9733-4930-a59e-b03fb883c426)
+![Screenshot (710)](https://github.com/user-attachments/assets/6b34bb80-7315-49dd-8555-e53042a1c4d9)
+![Screenshot (711)](https://github.com/user-attachments/assets/05fdb410-3c10-41eb-a578-828e644ca355)
+![Screenshot (712)](https://github.com/user-attachments/assets/4ed466b4-88dc-41dc-a7e4-d172688fc4da)
+![Screenshot (713)](https://github.com/user-attachments/assets/6d370eb8-cc44-42be-8e91-7ec0c4730d48)
+![Screenshot (714)](https://github.com/user-attachments/assets/eab99f0d-925c-490d-979a-b476cefd40bc)
+![Screenshot (715)](https://github.com/user-attachments/assets/bc28599b-4a0f-4225-a994-cd92a706e616)
+![Screenshot (716)](https://github.com/user-attachments/assets/186ae5ee-97bd-40b5-a0eb-8194a28c19aa)
+![Screenshot (717)](https://github.com/user-attachments/assets/e65710f1-cebf-4ef6-91da-b1dc490364a2)
+![Screenshot (718)](https://github.com/user-attachments/assets/8adb250c-3fab-441a-ae9a-94616450e119)
+![Screenshot (719)](https://github.com/user-attachments/assets/efde8218-75f3-4cfd-a58a-2687b2bfca4d)
+![Screenshot (720)](https://github.com/user-attachments/assets/e9ffff00-6b71-4601-8ffd-2b4680a637f4)
+![Screenshot (721)](https://github.com/user-attachments/assets/054cd031-3dc3-4a98-94bf-188b71469b6e)
+![Screenshot (722)](https://github.com/user-attachments/assets/bf4f537f-b46b-4c03-a537-f30fb1bc2a4c)
+
+
+## Lab Steps to Git-Clone
 
 
