@@ -1817,14 +1817,118 @@ Replace the old netlist with the new netlist generated after timing ECO fix and 
         exit
 
 
+# Final steps for RTL2GDS using tritonRoute and openSTA
+
+To generate a Power Distribution Network (PDN) in OpenLANE, follow these steps:
+### 1. PDN Overview:
+    -  The PDN ensures that all cells and macros receive stable VDD (power) and VSS (ground).
+    -  It distributes power across the chip using rails, connecting them effectively to all components.
+
+### 2. Using gen_pdn Procedure:
+    -  This procedure automatically sets up the power grid and rails.
+    -  Ensure variables like LIB_SYNTH_COMPLETE and LEF_MERGED_UNPADDED are correctly defined in the config.tcl file.
+
+![image](https://github.com/user-attachments/assets/425e00ce-82c0-4ea4-bddb-0daef8ba4df8)
 
 
+Check the or_pdn.tcl for detailed PDN generation commands.
+
+    cd Desktop/work/tools/openlane_working_dir/openlane
+    docker
+    ./flow.tcl -interactive
+    package require openlane 0.9
+    prep -design picorv32a
+    set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+    add_lefs -src $lefs
+    set ::env(SYNTH_STRATEGY) "DELAY 3"
+    set ::env(SYNTH_SIZING) 1
+    run_synthesis
+    init_floorplan
+    place_io
+    tap_decap_or
+    run_placement
+    gen_pdn 
+
+![gen_pdn](https://github.com/user-attachments/assets/6bfac1ea-03db-446e-8e28-a5aea990cc45)
+![gen_pdn_1](https://github.com/user-attachments/assets/204083cd-196d-4cfd-9553-be2c66c87430)
 
 
+-  Commands to load PDN def in magic in another terminal
+
+        cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/12-09_12-31/tmp/floorplan/
+        magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read 14-pdn.def &
+
+![pdn_def](https://github.com/user-attachments/assets/7ef39358-277d-472e-91fa-e0656af1d534)
+![pdn_def_1](https://github.com/user-attachments/assets/1bb97d0f-32b1-4c87-b029-69c0e74da41b)
+
+-  In VLSI design, routing is divided into two key stages: Global Route and Detail Route:
+   
+1. Global Route:
+    -  The purpose is to quickly determine a high-level routing path using a 3D routing grid across the chip.
+    -  It provides a rough routing guide or boxes representing the regions for nets.
+2. Detail Route:
+    -  Executed by the tritonRoute engine, it refines the global route by finding the exact path for each wire, considering manufacturing constraints and design rules.
+    -  It uses global routing guides for precise connectivity. 
 
 
+![image](https://github.com/user-attachments/assets/ed7ca370-e608-4e15-b91a-fd5b66a11a5c)
+
+### TritonRoute Features: Honoring Pre-Processed Route Guides:
+-  TritonRoute uses the routing guides from the global route phase.
+    -  Requirements:
+          1)  Unit width.
+          2)  Preferred direction.
+-  Connectivity checks between two guides:
+    -  Same layer with touching edges.
+    -  Neighboring layers with vertical overlap.
+
+-  Intra-Layer and Inter-Layer Routing: Each unconnected terminal (pin) must overlap with a route guide.
+    -  Intra-layer routing: Within the same metal layer.
+    -  Inter-layer routing: Between different metal layers.
+-  Inputs and Outputs:
+    -  Inputs: LEF files.
+    -  Outputs: Optimized detailed routing with minimal wire length and via count.
 
 
+-  Perform detailed routing using TritonRoute and explore the routed layout. Command to perform routing
 
+        echo $::env(CURRENT_DEF)
+        echo $::env(ROUTING_STRATEGY)
+        run_routing
+
+![routing_1](https://github.com/user-attachments/assets/6848e815-6dd8-4208-8f7e-2319bbec2900)
+![routing_2](https://github.com/user-attachments/assets/0dfa33dc-1b38-49e6-9a9d-ca12ba535fec)
+![Routing_3](https://github.com/user-attachments/assets/2ef2d0de-02b0-4a00-84af-1828ac6300bc)
 
    
+-  Commands to load routed def in magic in another terminal
+
+        cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/12-09_12-31/results/routing/
+        magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.def &
+
+![Routed_def](https://github.com/user-attachments/assets/2eb4dc59-7158-4e45-8660-0cdc4c807e55)
+![routed_def_1](https://github.com/user-attachments/assets/a85a1e90-fd58-4cb8-a2c0-a6d8bac0ce0d)
+![routed_def_2](https://github.com/user-attachments/assets/866d8b1d-1070-4916-8c0b-759fd1b12b45)
+
+
+
+-  The Final Layout which has been generated after undergoing all the steps shown below.
+
+![Final_route](https://github.com/user-attachments/assets/f5f2b23d-5a93-4ba2-8ebf-534e6b643085)
+![Final_layout](https://github.com/user-attachments/assets/62f786fa-9505-4964-9c12-3d22332bbad6)
+
+
+--------------------------------------------------------
+
+# ACKNOWLEDGMENT
+
+I would like to sincerely thank Mr. Kunal Ghosh, Co-founder of VLSI System Design (VSD) Corp. Pvt. Ltd., and Mr. Nickson Jose for their invaluable mentorship and exceptional guidance throughout the DIGITAL-VLSI-SOC-DESIGN-AND-PLANNING workshop. Their profound expertise and dedication to teaching have been instrumental in deepening my understanding of physical chip design and OpenLANE methodologies. The knowledge and skills I've gained have been transformative, and I truly appreciate the time, effort, and insights they shared, making this experience a remarkable and rewarding journey.
+
+Their generosity in sharing cutting-edge techniques and real-world insights, combined with their passion for educating future engineers, have had a profound impact on my learning. I am deeply grateful for the practical, hands-on approach, which has provided a strong foundation for my future endeavors in the field of VLSI design.
+
+Thank you once again to Mr. Kunal Ghosh and Mr. Nickson Jose for making this workshop an unforgettable and deeply enriching experience.
+
+[Kunal Ghosh](https://github.com/kunalg123) , Co-founder, VSD Pvt, LTD.
+--------------------------------------------------------
+
+
