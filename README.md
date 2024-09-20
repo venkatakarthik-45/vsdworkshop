@@ -1807,7 +1807,7 @@ Replace the old netlist with the new netlist generated after timing ECO fix and 
         read_def /openLANE_flow/designs/picorv32a/runs/12-09_12-31/results/cts/picorv32a.cts.def
         write_db pico_cts.db
         read_db pico_cts.db
-        read_verilog /openLANE_flow/designs/picorv32a/runs/24-03_10-03/results/synthesis/picorv32a.synthesis_cts.v
+        read_verilog /openLANE_flow/designs/picorv32a/runs/12-09_12-31/results/synthesis/picorv32a.synthesis_cts.v
         read_liberty $::env(LIB_SYNTH_COMPLETE)
         link_design picorv32a
         read_sdc /openLANE_flow/designs/picorv32a/src/my_base.sdc
