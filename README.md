@@ -1114,13 +1114,13 @@ The following images and information show the git clone options,
 ### 2. Active Region Formation:
 -  Defining the Regions: The p-type silicon substrate is etched to create isolated pockets, where individual NMOS and PMOS transistors will be formed.
 -  Isolation Process:
-  -  A thin layer (~40 nm) of silicon dioxide (SiO₂) is deposited for electrical isolation.
-  -  Over the SiO₂, a thicker (~80 nm) silicon nitride (Si₃N₄) layer is deposited, which will serve as a hard mask during subsequent etching steps.
+    -  A thin layer (~40 nm) of silicon dioxide (SiO₂) is deposited for electrical isolation.
+    -  Over the SiO₂, a thicker (~80 nm) silicon nitride (Si₃N₄) layer is deposited, which will serve as a hard mask during subsequent etching steps.
 -  Photolithography and Etching:
-  -  A photoresist layer (~1 µm) is deposited over the Si₃N₄ layer, and Mask 1 is applied using UV light to expose unwanted regions.
-  -  The exposed Si₃N₄ is etched away, exposing the SiO₂ underneath.
-  -  The photoresist is then removed, and the wafer undergoes a Local Oxidation of Silicon (LOCOS) process to grow thick SiO₂ in the exposed areas, creating an insulating layer. This prevents interference between transistors (known as bird’s beak formation during oxide growth).
-  -    Final Cleaning: Si₃N₄ is removed using hot phosphoric acid to complete the isolation of transistor regions.
+    -  A photoresist layer (~1 µm) is deposited over the Si₃N₄ layer, and Mask 1 is applied using UV light to expose unwanted regions.
+    -  The exposed Si₃N₄ is etched away, exposing the SiO₂ underneath.
+    -  The photoresist is then removed, and the wafer undergoes a Local Oxidation of Silicon (LOCOS) process to grow thick SiO₂ in the exposed areas, creating an insulating layer. This prevents interference between transistors (known as bird’s beak formation during oxide growth).
+-   Final Cleaning: Si₃N₄ is removed using hot phosphoric acid to complete the isolation of transistor regions.
 
 ![Screenshot (726)](https://github.com/user-attachments/assets/7b176bcc-16d1-44bf-a081-a46cc9a02864)
 ![Screenshot (727)](https://github.com/user-attachments/assets/8a5ac75a-f5cd-4a98-9593-8acb7f7cf98a)
@@ -1177,8 +1177,8 @@ First, the P-well region is protected with photoresist, and Mask 2 is used for p
 ### 5. Lightly Doped Drain (LDD) Formation:
 -  Mitigating Short-Channel Effects: The LDD structure helps minimize hot electron effects and short-channel issues by using gradual doping.
 -  Process:
-  -  For NMOS, phosphorus ions are implanted using Mask 7 to create lightly doped N regions (N-).
-  -  For PMOS, boron ions are implanted using Mask 8, forming lightly doped P regions (P-).
+    -  For NMOS, phosphorus ions are implanted using Mask 7 to create lightly doped N regions (N-).
+    -  For PMOS, boron ions are implanted using Mask 8, forming lightly doped P regions (P-).
 -  Spacer Formation: Thick layers of SiO₂ or Si₃N₄ are deposited, and anisotropic etching is performed to create spacers on the sides of the gate. These spacers protect the light doping regions during subsequent high-energy doping.
 
 ![Screenshot (760)](https://github.com/user-attachments/assets/21883e2f-1fc2-477b-9ac9-b22b792f5eaf)
@@ -1187,9 +1187,18 @@ First, the P-well region is protected with photoresist, and Mask 2 is used for p
 ### 6. Source/Drain Formation:
 -  Screen Oxide Layer: A thin screen oxide layer is deposited to prevent channeling during ion implantation.
 -  Ion Implantation:
-  -  In the P-well (NMOS region), arsenic ions are implanted (~75 keV) using Mask 9 to create heavily doped N+ regions, which will form the source and drain.
-  -  In the N-well (PMOS region), boron ions (~50 keV) are implanted using Mask 10 to form the P+ source and drain regions.
+    -  In the P-well (NMOS region), arsenic ions are implanted (~75 keV) using Mask 9 to create heavily doped N+ regions, which will form the source and drain.
+    -  In the N-well (PMOS region), boron ions (~50 keV) are implanted using Mask 10 to form the P+ source and drain regions.
 Annealing: A high-temperature annealing step (~1000°C) activates the dopants and repairs any crystal damage from implantation.
+
+![Screenshot (761)](https://github.com/user-attachments/assets/7e53cf4f-90df-40f2-ae44-a57ef320bd9b)
+![Screenshot (762)](https://github.com/user-attachments/assets/87801937-c4ee-49a7-8e20-07d6474f8536)
+![Screenshot (763)](https://github.com/user-attachments/assets/58335c51-9a9e-4de5-aaca-3be598fa5735)
+![Screenshot (764)](https://github.com/user-attachments/assets/b4d3e3bc-ebbb-4d3c-a3f8-6011b151446b)
+![Screenshot (765)](https://github.com/user-attachments/assets/5f569d69-4314-494d-9566-366b18344f97)
+![Screenshot (766)](https://github.com/user-attachments/assets/d75a73fd-e2ff-4bee-8461-64acfba10a22)
+![Screenshot (767)](https://github.com/user-attachments/assets/4ce53669-f324-4fe5-9cf6-be43c83a7f3d)
+
 
 
 ### 7. Local Interconnect Formation:
@@ -1199,6 +1208,17 @@ Annealing: A high-temperature annealing step (~1000°C) activates the dopants an
   -  Another reaction between Ti and nitrogen forms titanium nitride (TiN), which serves as a barrier and contact material for local interconnects.
 -  Etching TiN: Using Mask 11 and photolithography, TiN is etched away from undesired areas.
 
+![Screenshot (768)](https://github.com/user-attachments/assets/522fce9e-eec1-46ac-bb9d-350bfbd19075)
+![Screenshot (769)](https://github.com/user-attachments/assets/a1057413-e9f7-4a61-ac0b-c8b90e574ec3)
+![Screenshot (770)](https://github.com/user-attachments/assets/21e72195-3c1a-4956-8cef-f0a7321eea43)
+![Screenshot (771)](https://github.com/user-attachments/assets/281d5bcf-c560-43b9-ab4e-eb46641af3b9)
+![Screenshot (772)](https://github.com/user-attachments/assets/54ce70eb-d649-4331-8246-d3c8e502f4f0)
+![Screenshot (773)](https://github.com/user-attachments/assets/4091da1c-a402-4ace-afcc-78821af78a81)
+![Screenshot (774)](https://github.com/user-attachments/assets/20330939-dd99-4954-aede-730bf7749156)
+![Screenshot (775)](https://github.com/user-attachments/assets/c920aa83-d979-461c-b9ca-b11bdcc3f852)
+![Screenshot (776)](https://github.com/user-attachments/assets/52a0b9fc-c7ec-42bc-b678-6d5265188841)
+![Screenshot (777)](https://github.com/user-attachments/assets/47338d5c-c12c-4a92-ace2-c047643cae8e)
+
 
 ### 8. Higher-Level Metal Formation:
 -  Surface Planarization: A thick SiO₂ layer with impurities is deposited over the wafer to create a planar surface, crucial for reliable metal interconnect formation. The surface is then polished using Chemical Mechanical Polishing (CMP) to ensure smoothness. Higher metal layers facilitate complex routing between multiple components on the chip.
@@ -1206,6 +1226,53 @@ Annealing: A high-temperature annealing step (~1000°C) activates the dopants an
 -  Design Rules: Design rules for spacing, width, and alignment of metal lines must be strictly followed to prevent short circuits, signal degradation, and manufacturing defects.
 -  Interconnect Performance: The design of higher-level metal layers impacts the performance of the chip, including signal speed and power consumption.
 
+![Screenshot (778)](https://github.com/user-attachments/assets/64dd4ace-063c-48a1-830b-acdd04bbe019)
+![Screenshot (779)](https://github.com/user-attachments/assets/2b72c3d7-dff0-4ac1-adf3-685173de9140)
+![Screenshot (780)](https://github.com/user-attachments/assets/8f47d4cf-37aa-4046-8969-a5f0e0ba0292)
+![Screenshot (781)](https://github.com/user-attachments/assets/97191d80-44ae-49f4-aee0-a60014c8637f)
+![Screenshot (782)](https://github.com/user-attachments/assets/4504e280-5059-4a48-b1ae-5189ea71747e)
+![Screenshot (783)](https://github.com/user-attachments/assets/efb7c085-4a8f-45db-b3e2-044ef61b4684)
+![Screenshot (784)](https://github.com/user-attachments/assets/89e542f9-8bf3-427b-93f2-e44566586741)
+![Screenshot (785)](https://github.com/user-attachments/assets/0073d7b7-8433-4dce-8804-21302443ec11)
+![Screenshot (786)](https://github.com/user-attachments/assets/42c13927-280d-4f70-8ca2-35e4d23a696e)
+![Screenshot (787)](https://github.com/user-attachments/assets/b755b16d-9f60-4893-8c9d-0a7d7e6b775a)
+![Screenshot (788)](https://github.com/user-attachments/assets/99653100-a0d4-43bc-b1bc-183e5364ecc2)
+![Screenshot (789)](https://github.com/user-attachments/assets/6258d59e-7094-44ab-8741-f00ad8b3806c)
 
-After all the fabrication steps which our chip gets involved , the final look is shown below,
+
+After all the fabrication steps in which our chip gets involved, the final look is shown below,
+
+![Screenshot (790)](https://github.com/user-attachments/assets/827962ea-61c3-4d48-9f11-ee7a71198efc)
+
+
+## INTRODUCTION TO SKY 130 BASE LAYERS LAYOUT AND LEF USING INVERTERS
+
+-  Now you need to load the custom inverter layout in Magic.
+-  The commands for those to clone the inverter from the git hub shown above earlier. Below is the process for your reference.
+
+![Opeining_Inverter_using_magic](https://github.com/user-attachments/assets/6c8884a3-5f70-4535-b94a-68a395bf9cbb)
+
+-  The Layout screenshot below is for you to look over.
+
+![Inverter_magic](https://github.com/user-attachments/assets/d897b0ad-957e-4b43-8bd0-74f39311d600)
+
+-  Now you need to identify the NMOS and PMOS
+
+![Pmos selected](https://github.com/user-attachments/assets/6cc937ff-04e9-4a6d-a61b-5ce3eaa86151)
+![nmos selected](https://github.com/user-attachments/assets/b7eaefc5-81a1-484b-a151-13f32374af12)
+
+-  Now we need to check the output terminal, P and also Nmos. for that, you need to press s once to select and press s again to select the entire thing.
+
+![selecting y](https://github.com/user-attachments/assets/7e9c3b84-9f1f-462c-ab38-39b13ea61e0d)
+![selecting p](https://github.com/user-attachments/assets/3e24a228-f96a-48b0-b318-93126eaf2dcc)
+![selecting nmos](https://github.com/user-attachments/assets/21993456-2e20-454e-8bcd-5af55e80bb59)
+
+-  Now we need to extract our Inverter in magic tkcon window using the following steps
+
+        pwd
+        extract all
+        ext2spice cthresh 0 rthresh 0 (This command is for parasitic extraction)
+        ext2spice
+
+-  Below are the screenshots for your reference
 
