@@ -1084,7 +1084,11 @@ Here is the first characteristic that we got after analyzing is
 
 ## LAB STEPS TO GIT-CLONE
 
-The following images and information show the git clone options,
+-  Below is the GitHub link to clone into your local directory by following the steps.
+
+[Git_Hub_Link_to_Clone](https://github.com/nickson-jose/vsdstdcelldesign)
+
+-  The following images and information show the git clone options,
 
           cd Desktop/work/tools/openlane_working_dir/openlane
 
@@ -1274,5 +1278,168 @@ After all the fabrication steps in which our chip gets involved, the final look 
         ext2spice cthresh 0 rthresh 0 (This command is for parasitic extraction)
         ext2spice
 
--  Below are the screenshots for your reference
+-  Below is the screenshot for your reference of the created SPICE File
+
+![spice_file](https://github.com/user-attachments/assets/f7ddf703-7ad8-488b-8c8c-d6a2610ac2e7)
+
+
+-  Now we need to edit our SPICE file as shown below
+
+![jkhb](https://github.com/user-attachments/assets/7b95294a-76b3-4293-a33b-d67b70acdd48)
+![Screenshot (791)](https://github.com/user-attachments/assets/d74e5c2d-a96c-4deb-80e3-a11c8f1a21d0)
+
+
+-  Now we need to perform post-layout NGSPICE Simulations
+-  Command for that is
+
+        ngspice sky130_inv.spice
+
+-  After that, we need to plot y vs time a as shown with the command below
+
+        plot y vs time a
+
+   
+-  Below are the screenshots for the simulation procedure and its results
+
+![ngspice_result1](https://github.com/user-attachments/assets/cac32f6c-e589-4fc4-bb1b-37a30f1eaf1f)
+![plot y vs time a](https://github.com/user-attachments/assets/8cf3913f-9993-4d9d-90e2-c15ef9f8bdf1)
+
+-  Rise time: The time taken for the output waveform to transit from 20% to 80% of its maximum value. Below are the values and their plot.
+
+-  Rise time = 2.2059 - 2.1642 = 0.0417ns
+
+![Risetime](https://github.com/user-attachments/assets/2b51ceee-fb21-4bab-8a20-d5e00e3ea063)
+![Risetimeplot](https://github.com/user-attachments/assets/1356f406-8690-4ad7-88fa-e42780450177)
+  
+-  Fall Time: The time taken for the output waveform to fall from 80% to 20% of its maximum value. Below are the values and its waveform.
+
+-  Fall time = 4.0686 - 4.0409 = 0.027ns
+
+![Falltime](https://github.com/user-attachments/assets/b7f074a7-8783-428d-a9b4-8ddbea1f127e)
+![Falltimeplot](https://github.com/user-attachments/assets/1da6c849-8b80-4a7a-94c4-f74d79960074)
+
+-  Cell Rise or Propagation delay: The time taken for the waveform from 50% of the output (0 to 1) to 50% of the input ( 1 to 0).
+
+-  Propagation delay = 2.1837 - 2.1465 = 0.0372ns
+
+-  Cell Fall delay: Its difference between the taken for 50% transistion at th output ( 1 to 0) corresponding to a 50% transistion at the input (0 to 1).
+
+-  Cell Fall Delay = 4.0544 - 4.0501 = 0.0043ns
+
+![all4values](https://github.com/user-attachments/assets/08d06156-1130-4654-8f8b-91a6ff8da59f)
+
+-  Post NG SPICE Layout
+
+![Post_ngspice](https://github.com/user-attachments/assets/b33550fd-65f3-4b8e-9899-6e9f34193bf5)
+
+## LAB CHALLENGE TO FIND MISSING or INCORRECT RULES and FIX THEM
+
+-  Before proceeding to our actual challenge, we must create an LEF file by checking out the following link.
+
+[weget](http://opencircuitdesign.com/open_pdks/archive/drc_tests.tgz)
+
+-  Now let's find the problem in the DRC section of the old magic tech file for the process and fix it.
+-  Below are Commands used to download the provided file and perform DRC corrections
+
+        cd
+        wget http://opencircuitdesign.com/open_pdks/archive/drc_tests.tgz
+        tar xfz drc_tests.tgz
+        cd drc_tests
+        ls -al
+        gvim .magicrc
+        magic -d XR &
+
+-  Below are the screenshots after executing the `.magicrc file` above commands
+
+![magicrcfile](https://github.com/user-attachments/assets/a13276f3-06de-4339-971f-ad3494d0a9a4)
+![magicrc1](https://github.com/user-attachments/assets/81923c35-319d-493c-b426-0ca141b090c4)
+
+### Now let's fix the poly.9 error
+
+-  Before actually fixing the error, first we need to understand the rules. For that below is the link showing the **SKY130 Peripheral rules**
+
+[SKY130_PERIPHERAL_RULES](https://skywater-pdk.readthedocs.io/en/main/rules/periphery.html)
+
+-  In the above-listed commands, the `magic -d XR &` opens the file and will able to see different layouts, below is the image for your reference
+
+![magic3](https://github.com/user-attachments/assets/12c94051-82e8-476e-b797-360070ad7ef6)
+
+-  Here’s a detailed explanation of the steps for filling an area with Metal 3 and creating a VIA2 mask using the Magic tool:
+
+-  Step 1: Select an Area and Fill it with Metal 3
+
+        Open the Magic GUI – Start Magic, which is the layout editor used for VLSI designs.
+        Select an Area – Identify the area you want to fill with Metal 3 in the layout.
+        Pointer to Metal 3 Layer – Switch to the Metal 3 layer, typically using the GUI layer selector or layer binding.
+        Fill the Area – Once selected, press ‘P’ (paint command) to fill the selected region with Metal 3. You can resize, move or reshape it before finalizing.
+
+-  Step 2: Create the VIA2 Mask
+
+        Open Tkcon Terminal – Tkcon is the console built into Magic for executing specific commands.
+        View VIA2 Layer – Type the command: cif see VIA2 in the terminal.
+        This command allows you to see the CIF (Caltech Intermediate Format) representation of the VIA2 layer, where vias are used to connect Metal 2 to Metal 3.
+        Association with Metal 3 – The metal 3 area you filled will now associate with the VIA2 mask. You can further refine the layout with these vias.
+
+-  Below is the output which you get after following the above steps
+
+![cif see VIA2](https://github.com/user-attachments/assets/95821350-317e-4940-b5ff-197bd3aa3394)
+
+- Now, let's resolve the poly.9 error in the Sky130 tech file. Open the poly.mag file in the magic tool using the command `load poly.mag` in the tkcon terminal.
+- Below are the references that you get after following the above step
+
+![poly9](https://github.com/user-attachments/assets/ed192f13-6b53-45de-812e-0732efdb7424)
+![poly9_1](https://github.com/user-attachments/assets/385bec52-9b41-466d-b03d-7560de28280f)
+
+-  Please consider rule poly.9 and then check the website for that specific rule."
+
+ ![image](https://github.com/user-attachments/assets/ab1b7743-cbbd-48d2-86da-f7a92de9fb9f)
+
+-  To find the tech file, you need to check in the drc_test directory. Search for poly.9 in that file and make changes as per the images shown below.
+
+![why_what](https://github.com/user-attachments/assets/13f8ad98-02de-4e45-b03c-2a0a3caa227a)
+![How_to_change_poly_9](https://github.com/user-attachments/assets/e0d8cb10-6bda-4a3b-b2e8-71508cc3153f)
+![How_to_change_poly_9_1](https://github.com/user-attachments/assets/b5cf8ec4-b5f4-4745-a67f-a07f568b14f9)
+![correct_snap](https://github.com/user-attachments/assets/2f36b0e8-7981-44e8-9869-c13018505794)
+
+-  After making the changes, you need to run few commands in tkcon window.
+
+        tech load sky130A.tech
+        drc check
+        drc why
+
+-  After executing, below is the screenshot of how our layout looks like
+
+![error_ixed](https://github.com/user-attachments/assets/b5c4a340-c864-4501-a9e5-00b2f8f8d08b)
+
+-  Now let's fix the incorrectly implemented difftap.2 rule
+
+![diff and tap](https://github.com/user-attachments/assets/e63e9348-d49a-4a7d-86fb-652c6be0ba70)
+![How to load nwell_mag](https://github.com/user-attachments/assets/1c4eea85-8ddc-4e47-ba2d-f4b06377e928)
+
+
+## Steps for DRC Error Correction:
+
+-  Modify the sky130A.tech file: You will make specific changes in this file to detect or fix errors in the design rules for nwell layers.
+-  Identify nwell.6 Model Error: Open the nwell.mag file in Magic. In the layout view, the deep nwell appears in yellow stripes and the nwell is shown as a dotted green pattern. This visualization helps you spot design errors related to these layers.
+
+-  Execute DRC Commands:
+    1) Use drc style drc(full) to set the style of the Design Rule Check (DRC) in full mode.
+    2) Run drc check to execute a full design check, identifying any geometrical errors or inconsistencies in your layout.
+
+-  Analyze and Fix Errors: Based on the DRC results, identify any missing or incorrect design rules. This might involve adjusting layer overlaps, spacing violations, or incomplete well formations. Update the layout or rule set to ensure correct design behavior.
+
+-  After following the above steps, below are the screen shots for your reference.
+
+![nwell_6](https://github.com/user-attachments/assets/8a69c96f-240f-48fb-9ce3-e4d2e3694882)
+![nwell4](https://github.com/user-attachments/assets/d9a32384-3f78-4466-b59c-e22ec830ec73)
+![nwell4_error](https://github.com/user-attachments/assets/b9857e3a-453b-44d3-a402-e3d6024e74d7)
+![nwell4_error1](https://github.com/user-attachments/assets/dc6ec567-0c41-4d3a-84df-153045eec758)
+![nwell4_after_drc](https://github.com/user-attachments/assets/7c58e5e8-de97-4355-8a72-337494cb1409)
+![final_nwell4](https://github.com/user-attachments/assets/986f5823-06c8-483d-83bc-434e04756403)
+
+# DAY-4 PRE-LAYOUT TIMING ANALYSIS AND IMPORTANCE OF GOOD CLOCK TREE
+
+## How to extract LEF File out of .mag file
+
+
 
