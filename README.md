@@ -1819,8 +1819,6 @@ Replace the old netlist with the new netlist generated after timing ECO fix and 
 
 
 
--  Explore post-CTS OpenROAD timing analysis by removing the 'sky130_fd_sc_hd__clkbuf_1' cell from the clock buffer list variable 'CTS_CLK_BUFFER_LIST'.
-
 
 
 
