@@ -1440,6 +1440,210 @@ After all the fabrication steps in which our chip gets involved, the final look 
 # DAY-4 PRE-LAYOUT TIMING ANALYSIS AND IMPORTANCE OF GOOD CLOCK TREE
 
 ## How to extract LEF File out of .mag file
+-  First, we need to follow a few guidelines.
+-  The input and output ports must lie on the intersection of the verticle and horizontal tracks.
+-  The width of the standard cell should be the odd multiple of the track's pitch.
+-  The height should be an odd multiple of the track's vertical pitch.
+-  Tracks: It traces the routes we want the signals to follow, such as metal1, metal2, etc. These specifications are provided by the tracks.
+
+For example, Li1 x 0.23 0.46 --> For the Li1 Layer, The "x" is the Horizontal track and is at an offset of 0.23 and has a pitch of 0.4.
+-  Same as every metal layer has X and Y.
+-  Now we need to ensure that the ports are on the Li1 horizontal and the vertical tracks. How to see that ? In magic after selecting the layout press "g", and the Bridge gets activated.
+
+![Day4_metals](https://github.com/user-attachments/assets/05ade09d-6015-455a-ad25-5eafae35326a)
+![Day4_press_g](https://github.com/user-attachments/assets/d3632ed2-167f-4755-92f9-5f87c6db0c3e)
+![Day4_grid_view](https://github.com/user-attachments/assets/78d0c253-e255-4994-aea0-94ad4b8fcce9)
+
+-  Tracks are used to define paths for metal layers (such as Metal 1, Metal 2, etc.) during routing. These tracks are grids where signals or wires are routed. Since PnR is automated, the designer needs to specify these tracks for proper routing guidance.
+-  For the li1, Metal 1, and Metal 2 layers, horizontal tracks are placed at intervals of 0.23 μm and 0.46 μm, while vertical tracks are at 0.17 μm and 0.34 μm.
+-  The ports are placed on the li1 layer, so to align them with the tracks, the layout grid must be converted into these tracks. This ensures that connections are made precisely where the routes are intended.
+-  Now we need to set grid values as tracks of locali layer.
+
+-  Commands to set the grid values in tkcon window,
+              
+        help grid
+        grid 0.46um 0.34um 0.23um 0.17um
+
+-  Now we need to see whether the ports are placed at the intersection lines. So both the conditions must satisfy.
+
+![conition_1_satiesfied](https://github.com/user-attachments/assets/af80e92c-f4bc-47f4-a716-ddf600ea6a32)
+![Condition_2_satisfied](https://github.com/user-attachments/assets/8db64b1c-bed0-433d-9f4e-f90ad48a320a)
+
+-  Now let's save our layout with a random name as `sky130_vsdinv.mag` in the tkcon window.
+-  The commands to save and open the new saved layout are shown below
+
+        save sky130_vsdinv.mag
+        magic -T sky130A.tech sky130_vsdinv.mag &
+
+![saving custom layout](https://github.com/user-attachments/assets/7245f2b3-adb4-4dfc-86bb-c52beaefa367)
+
+-  Verifying the newly saved custom layout and track info as shown below.
+
+![Proof_name_custome_layout](https://github.com/user-attachments/assets/bf17ba68-1eda-4183-abdf-4af3ce0454ed)
+![To_see_tracks_info](https://github.com/user-attachments/assets/b4a85854-94e3-486b-9d2d-38911369b389)
+
+-  Below is the layout after saving it with new name.
+
+![naming_after_custom_layout](https://github.com/user-attachments/assets/1a340ef9-bcec-4394-99c5-7c372c2b8908)
+
+
+-  Now let's generate LEF from the layout using the following command which should write on tkcon window,
+
+        lef write
+
+![lef_write](https://github.com/user-attachments/assets/1139c169-3f5f-46a5-9a1e-5486c388da60)
+   
+-  Now copy the newly generated LEF and its required .lib files to `picorv32a` design src directory.
+-  Below are the commands for this process
+
+        cp sky130_vsdinv.lef ~/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src/  (cp is to copy lef files)
+        ls ~/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src/
+        cp libs/sky130_fd_sc_hd__* ~/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src/ (here we are copying lib files)
+        ls ~/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src/
+
+![copying_lef_1](https://github.com/user-attachments/assets/44726cdc-2e68-411a-9548-39ed58853944)
+![copying_lef_2](https://github.com/user-attachments/assets/87a751c1-a294-4ff6-bd2b-c09cf56e8d6c)
+![library_for_ynthesis](https://github.com/user-attachments/assets/45427946-29e2-4035-9efa-46d772560bae)
+![copying_libs_1](https://github.com/user-attachments/assets/9ac58c50-e1f4-472a-8a72-75b54cf4aacf)
+![copying_libs_2](https://github.com/user-attachments/assets/a1b02cbd-c0a4-4c1f-adb5-792fd612565f)
+
+
+-  Now let's edit the `config.tcl` file to change the lib file and lef file into our openlane flow.
+-  The below commands must be added to our existing config.tcl file to include our custom cell in the flow.
+
+        set ::env(LIB_SYNTH) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__typical.lib"
+        set ::env(LIB_FASTEST) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__fast.lib"
+        set ::env(LIB_SLOWEST) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__slow.lib"
+        set ::env(LIB_TYPICAL) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__typical.lib"
+        set ::env(EXTRA_LEFS) [glob $::env(OPENLANE_ROOT)/designs/$::env(DESIGN_NAME)/src/*.lef]
+
+![config_tcl](https://github.com/user-attachments/assets/a92550ea-5306-44a1-862f-a68c7551be1d)
+
+-  Now let's run the OpenLANE flow synthesis using our custom inverter cell.
+
+-  Below are the commands that should follow the process for synthesis
+
+        cd Desktop/work/tools/openlane_working_dir/openlane
+        docker
+        ./flow.tcl -interactive
+        package require openlane 0.9
+        set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+        add_lefs -src $lefs
+        run_synthesis
+
+![process_for_newlef_perform_synthesis_1](https://github.com/user-attachments/assets/bddcd371-2a3c-4d08-bfa7-e2c1dae7e025)
+![process_for_newlef_perform_synthesis_2](https://github.com/user-attachments/assets/89521754-2717-4bda-be4f-147232ed6684)
+![process_for_newlef_perform_synthesis_3](https://github.com/user-attachments/assets/8fdd041a-3e52-4471-8f46-05b78e58f733)
+![process_for_newlef_perform_synthesis_4](https://github.com/user-attachments/assets/073cb07c-ece7-46a4-8521-4eff1b28867e)
+
+-  After running the synthesis, we got
+
+        tns = -711.59 which is Total Negative Slack.
+        wns = -23.89 which is Maximum Slack.
+-  Since there is slack by newly introduced violations, we need to reduce it by modifying the design parameters as shown below.
+
+        prep -design picorv32a -tag 12-09_12-31 -overwrite
+        set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+        add_lefs -src $lefs
+        echo $::env(SYNTH_STRATEGY)
+        set ::env(SYNTH_STRATEGY) "DELAY 3"
+        echo $::env(SYNTH_BUFFERING)
+        echo $::env(SYNTH_SIZING)
+        set ::env(SYNTH_SIZING) 1
+        echo $::env(SYNTH_DRIVING_CELL)
+        run_synthesis
+
+![process_for_newlef_perform_synthesis_5](https://github.com/user-attachments/assets/a08b9205-b604-45d2-8190-c63a945e9533)
+![process_for_newlef_perform_synthesis_6](https://github.com/user-attachments/assets/9585405e-1b72-4b07-8c10-17be2518ff03)
+![process_for_newlef_perform_synthesis_7](https://github.com/user-attachments/assets/cf1edf15-6452-40a7-86e6-cbfc2548be51)
+![process_for_newlef_perform_synthesis_8](https://github.com/user-attachments/assets/51e953c0-658e-4a17-a458-451ea6d2eddc)
+![process_for_newlef_perform_synthesis_9](https://github.com/user-attachments/assets/99025437-bdb8-4f5f-ac88-d1f1adaf4369)
+
+-  If you observe closely, the previous tns and wns values has become 0
+-  Now lets run the floorplan
+
+        run_floorplan
+
+![Next_floorplan](https://github.com/user-attachments/assets/6cfe2343-94dc-464e-8390-8618f2abfcbd)
+![floorplan_failed](https://github.com/user-attachments/assets/d14638c7-8a36-4d77-acbc-ab2d5a71b48a)
+
+-  To address unexpected errors with the `run_floorplan` command in OpenLANE, an alternative approach involves using specific commands from the script located in `openlane/scripts/tcl_commands/floorplan.tcl`. Additionally, OpenLANE's documentation `(OpenLANE_commands.md)` provides detailed guidance on floorplanning commands. You can manually execute commands like `floorplan_design`, `place_io`, and `resize_area` from these resources to achieve the desired layout. These commands offer control over the floorplanning process and can be customized to bypass the errors encountered with the `run_floorplan` command.
+
+-  To run the floorplan here are the individual steps that combines all together as a run_floorplan command.
+
+        init_floorplan
+        place_io
+        tap_decap_or
+
+![floorplan_1](https://github.com/user-attachments/assets/bfc0be20-a6d8-4b12-b7af-9e62ae1c9ded)
+![floorplan_2](https://github.com/user-attachments/assets/0b5fe21e-c89d-4dac-b640-39dbe25e8fd5)
+![floorplan_done](https://github.com/user-attachments/assets/77aec639-57f5-4c7c-8454-02b4c8f2f796)
+
+
+-  Now lets run placement
+
+        run_placement
+
+![placement_sucess](https://github.com/user-attachments/assets/e59b4e43-d97f-445a-b5ea-adb92608e899)
+
+-  Now lets load the placement def in the magic tool.
+-  Commands we need to follow,
+
+        cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/12-09_12-31/results/placement/
+        magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.placement.def &
+
+![image](https://github.com/user-attachments/assets/952d862e-c7be-41c3-878c-a1adde5be00d)
+![cell](https://github.com/user-attachments/assets/aed4bbf0-ad15-40c5-8d04-850397f6a612)
+
+### INTRODUCTION TO DELAY TABLES
+
+Delay tables are used to capture varying delays caused by changes in load and input transitions in circuits. Specifically, the output capacitance and input transitions differ at various points in a clock tree, leading to a range of delays.
+
+-  Power-Aware Clock Tree Synthesis (CTS): In Power-Aware CTS, clock gating techniques (using logic gates like AND or OR) are implemented to save power by blocking clock propagation when necessary, minimizing unnecessary switching.
+
+-  Delay Table Preparation: To prepare delay tables, one buffer is isolated from a circuit. By varying its input transition (e.g., 10 ps to 100 ps), the corresponding output load also changes. These variations in delay are characterized and documented in a tabular format to create the delay table.
+
+-  Key Assumptions and Observations:
+    1)  Identical buffers at the same level in the clock tree.
+    2)  Varied loads at nodes (e.g., capacitance at nodes A, B, C).
+    3)  Transition delay changes with load variation.
+
+## TIMING ANALYSIS WITH IDEAL CLOCKS USING OPENSTA
+
+Timing Analysis with Ideal Clocks using OpenSTA:
+
+Setup Timing Analysis:
+-  Clock Specification: Frequency = 1 GHz, Period = 1 ns.
+-  Process Overview: The edge arrives at the launch flop at time 0 and at the capture flop at time T = 1 ns. The system works properly if the combinational delay (θ) is less than the clock period (T), hence θ < T.
+-  Setup Time: Setup time (S) is the minimum time before the clock edge that the data input (D) must be stable. This modifies the timing constraint: θ < (T - S).
+
+### Clock Jitter and Uncertainty:
+-  Jitter is the variation in clock signal generation due to PLL variations. To account for clock uncertainty (US), the equation is modified to θ < (T - S - US).
+-  In general, Clock skew is two different flip flops that receive the clock signal at slightly different times due to differences in clock net length but the clock jitter is on the same flip flop but the position of the clock edge moves edge to edge due to some noise in the oscillator.
+-  Now Do Post-Synthesis timing analysis with the OpenSTA tool,
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
