@@ -1930,5 +1930,9 @@ Thank you once again to Mr. Kunal Ghosh and Mr. Nickson Jose for making this wor
 
 [Kunal Ghosh](https://github.com/kunalg123) , Co-founder, VSD Pvt, LTD.
 --------------------------------------------------------
+# CERTIFICATE OF COMPLETION
+
+![16_VSD nasscom Certificate 2024 pdfGitHub Repo_page-0001](https://github.com/user-attachments/assets/f0b6945a-d1bb-4ff7-8470-6a8aa915864c)
+
 
 
